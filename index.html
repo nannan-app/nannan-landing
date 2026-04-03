@@ -19,44 +19,27 @@
       --text-secondary: #8c8478;
       --border: #e8e0d4;
       --green-bubble: #d4e8c2;
-      --white-bubble: #ffffff;
       --radius: 16px;
       --max-w: 1120px;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
+      background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden;
     }
-
     .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
 
     /* Nav */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250, 248, 245, 0.85);
-      backdrop-filter: blur(20px);
+      background: rgba(250, 248, 245, 0.85); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
-    nav .container {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
-    }
-    .nav-logo {
-      font-size: 20px; font-weight: 700; color: var(--accent);
-      display: flex; align-items: center; gap: 8px;
-    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { font-size: 20px; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 8px; }
     .nav-logo span { font-size: 14px; color: var(--text-secondary); font-weight: 400; }
     .nav-links { display: flex; align-items: center; gap: 24px; }
-    .nav-links a {
-      text-decoration: none; color: var(--text-secondary); font-size: 14px;
-      transition: color 0.2s;
-    }
+    .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 14px; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
     .lang-btn {
       background: var(--bg-warm); border: 1px solid var(--border);
@@ -66,83 +49,65 @@
     .lang-btn:hover { background: var(--border); color: var(--text); }
 
     /* Hero */
-    .hero {
-      padding: 140px 0 80px; text-align: center;
-    }
+    .hero { padding: 140px 0 80px; text-align: center; }
     .hero-badge {
       display: inline-block; background: var(--green-bubble);
       color: var(--accent); font-size: 13px; font-weight: 500;
       padding: 6px 16px; border-radius: 20px; margin-bottom: 24px;
     }
     .hero h1 {
-      font-size: clamp(36px, 5vw, 56px); font-weight: 700;
-      line-height: 1.2; margin-bottom: 20px;
+      font-size: clamp(36px, 5vw, 56px); font-weight: 700; line-height: 1.2; margin-bottom: 20px;
       background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .hero p {
-      font-size: 18px; color: var(--text-secondary);
-      max-width: 560px; margin: 0 auto 40px;
-    }
+    .hero p.subtitle { font-size: 18px; color: var(--text-secondary); max-width: 560px; margin: 0 auto 40px; }
     .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
       background: var(--accent); color: white; border: none;
-      padding: 14px 32px; border-radius: 12px; font-size: 16px;
-      font-weight: 600; cursor: pointer; transition: all 0.2s;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
     }
     .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
     .btn-secondary {
       background: transparent; color: var(--text); border: 1px solid var(--border);
-      padding: 14px 32px; border-radius: 12px; font-size: 16px;
-      font-weight: 500; cursor: pointer; transition: all 0.2s;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
     }
     .btn-secondary:hover { background: var(--bg-warm); }
-    .price-tag {
-      font-size: 14px; color: var(--text-secondary); margin-top: 12px;
-    }
+    .price-tag { font-size: 14px; color: var(--text-secondary); margin-top: 12px; }
     .price-tag strong { color: var(--accent); font-size: 18px; }
 
-    /* Screenshot hero */
+    /* Screenshots */
     .hero-screenshot {
       margin: 60px auto 0; max-width: 900px;
       border-radius: 16px; overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 0 0 1px var(--border);
     }
-    .screenshot-placeholder {
-      background: var(--bg-warm); border: 2px dashed var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-secondary); font-size: 14px; text-align: center;
-      padding: 20px; border-radius: 12px;
-    }
-    .hero-screenshot .screenshot-placeholder { height: 500px; border-radius: 16px; border: none; }
+    .hero-screenshot img { width: 100%; display: block; }
+    .lang-img-en, .lang-img-zh { display: none; }
+    [data-lang="en"] .lang-img-en { display: block; }
+    [data-lang="zh"] .lang-img-zh { display: block; }
+    [data-lang="en"] .lang-text-zh,
+    [data-lang="zh"] .lang-text-en { display: none; }
+    [data-lang="en"] .lang-text-en,
+    [data-lang="zh"] .lang-text-zh { display: block; }
 
-    /* Features */
+    /* Section */
+    .section-title { text-align: center; margin-bottom: 60px; }
+    .section-title h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+    .section-title p { font-size: 16px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
+
+    /* Features grid */
     .features { padding: 100px 0; }
-    .section-title {
-      text-align: center; margin-bottom: 60px;
-    }
-    .section-title h2 {
-      font-size: 32px; font-weight: 700; margin-bottom: 12px;
-    }
-    .section-title p {
-      font-size: 16px; color: var(--text-secondary); max-width: 480px; margin: 0 auto;
-    }
-
-    .features-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .feature-card {
-      background: white; border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 32px;
-      transition: all 0.3s;
+      background: white; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px; transition: all 0.3s;
     }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
     .feature-icon {
       width: 48px; height: 48px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
@@ -154,124 +119,84 @@
     /* Showcase */
     .showcase { padding: 80px 0; }
     .showcase-item {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center; margin-bottom: 100px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; margin-bottom: 100px;
     }
-    .showcase-item:nth-child(even) { direction: rtl; }
-    .showcase-item:nth-child(even) > * { direction: ltr; }
+    .showcase-item.reverse { direction: rtl; }
+    .showcase-item.reverse > * { direction: ltr; }
     .showcase-text h3 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
     .showcase-text p { font-size: 16px; color: var(--text-secondary); margin-bottom: 12px; }
-    .showcase-screenshot .screenshot-placeholder { height: 360px; }
+    .showcase-img {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px var(--border);
+    }
+    .showcase-img img { width: 100%; display: block; }
 
     /* Security */
-    .security {
-      padding: 80px 0;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
-    }
-    .security-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 24px; margin-top: 48px;
-    }
+    .security { padding: 80px 0; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%); }
+    .security-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px; }
     .security-card {
-      background: white; border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 28px;
-      display: flex; gap: 16px;
+      background: white; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px; display: flex; gap: 16px;
     }
-    .security-card .icon {
-      font-size: 28px; flex-shrink: 0;
-    }
+    .security-card .icon { font-size: 28px; flex-shrink: 0; }
     .security-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
     .security-card p { font-size: 14px; color: var(--text-secondary); }
 
     /* Pricing */
     .pricing { padding: 100px 0; text-align: center; }
     .pricing-card {
-      max-width: 420px; margin: 40px auto 0;
-      background: white; border: 2px solid var(--accent);
-      border-radius: 20px; padding: 48px 40px;
+      max-width: 420px; margin: 40px auto 0; background: white;
+      border: 2px solid var(--accent); border-radius: 20px; padding: 48px 40px;
       box-shadow: 0 12px 40px rgba(124, 111, 91, 0.12);
     }
-    .pricing-card .price {
-      font-size: 48px; font-weight: 700; color: var(--accent);
-    }
-    .pricing-card .price-period {
-      font-size: 16px; color: var(--text-secondary); margin-bottom: 24px;
-    }
-    .pricing-card ul {
-      list-style: none; text-align: left; margin-bottom: 32px;
-    }
-    .pricing-card li {
-      padding: 8px 0; font-size: 15px; color: var(--text);
-      display: flex; align-items: center; gap: 10px;
-    }
+    .pricing-card .price { font-size: 48px; font-weight: 700; color: var(--accent); }
+    .pricing-card .price-period { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; }
+    .pricing-card ul { list-style: none; text-align: left; margin-bottom: 32px; }
+    .pricing-card li { padding: 8px 0; font-size: 15px; display: flex; align-items: center; gap: 10px; }
     .pricing-card li::before { content: "\2713"; color: var(--accent); font-weight: 700; }
     .pricing-card .btn-primary { width: 100%; justify-content: center; }
-
-    /* Platforms */
-    .platforms {
-      display: flex; gap: 12px; justify-content: center; margin-top: 20px;
-    }
+    .platforms { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
     .platform-badge {
       background: var(--bg-warm); border: 1px solid var(--border);
-      padding: 8px 16px; border-radius: 8px; font-size: 13px;
-      color: var(--text-secondary);
+      padding: 8px 16px; border-radius: 8px; font-size: 13px; color: var(--text-secondary);
     }
 
     /* Footer */
-    footer {
-      padding: 60px 0 40px;
-      border-top: 1px solid var(--border);
-    }
-    .footer-content {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      flex-wrap: wrap; gap: 40px;
-    }
+    footer { padding: 60px 0 40px; border-top: 1px solid var(--border); }
+    .footer-content { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
     .footer-brand h3 { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
     .footer-brand p { font-size: 14px; color: var(--text-secondary); max-width: 280px; }
     .footer-links h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
-    .footer-links a {
-      display: block; font-size: 14px; color: var(--text-secondary);
-      text-decoration: none; margin-bottom: 8px; transition: color 0.2s;
-    }
+    .footer-links a { display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
-    .footer-bottom {
-      text-align: center; margin-top: 48px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-      font-size: 13px; color: var(--text-secondary);
-    }
+    .footer-bottom { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
 
     /* Responsive */
     @media (max-width: 768px) {
       .features-grid { grid-template-columns: 1fr; }
-      .showcase-item { grid-template-columns: 1fr; gap: 32px; }
-      .showcase-item:nth-child(even) { direction: ltr; }
+      .showcase-item, .showcase-item.reverse { grid-template-columns: 1fr; gap: 32px; direction: ltr; }
       .security-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 32px; }
       .footer-content { flex-direction: column; }
       .nav-links a.hide-mobile { display: none; }
     }
-    @media (max-width: 480px) {
-      .hero-buttons { flex-direction: column; align-items: center; }
-    }
+    @media (max-width: 480px) { .hero-buttons { flex-direction: column; align-items: center; } }
 
     /* Animations */
-    .fade-up {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
-<body>
+<body data-lang="en">
 
-<!-- Nav -->
 <nav>
   <div class="container">
     <div class="nav-logo">Murmur <span>喃喃</span></div>
     <div class="nav-links">
-      <a href="#features" class="hide-mobile" data-i18n="nav.features">Features</a>
-      <a href="#security" class="hide-mobile" data-i18n="nav.security">Security</a>
-      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#features" class="hide-mobile"><span class="lang-text-en">Features</span><span class="lang-text-zh">功能</span></a>
+      <a href="#security" class="hide-mobile"><span class="lang-text-en">Security</span><span class="lang-text-zh">安全</span></a>
+      <a href="#pricing"><span class="lang-text-en">Pricing</span><span class="lang-text-zh">价格</span></a>
       <button class="lang-btn" onclick="toggleLang()">中文</button>
     </div>
   </div>
@@ -280,18 +205,35 @@
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge" data-i18n="hero.badge">Private & Encrypted</div>
-    <h1 data-i18n="hero.title">Write like you're texting yourself</h1>
-    <p data-i18n="hero.subtitle">Murmur is a beautiful, encrypted chat-style diary. Capture your thoughts in message bubbles, let AI be your warm companion, and keep everything private on your device.</p>
-    <div class="hero-buttons">
-      <a href="#pricing" class="btn-primary" data-i18n="hero.cta">Download Now &mdash; $9.90</a>
-      <a href="#features" class="btn-secondary" data-i18n="hero.learn">Learn More</a>
+    <div class="hero-badge">
+      <span class="lang-text-en">Private &amp; Encrypted</span>
+      <span class="lang-text-zh">隐私加密</span>
     </div>
-    <p class="price-tag" data-i18n="hero.price">One-time purchase of <strong>$9.90</strong>. Own it forever.</p>
+    <h1>
+      <span class="lang-text-en">Write like you're texting yourself</span>
+      <span class="lang-text-zh">像发消息一样写日记</span>
+    </h1>
+    <p class="subtitle">
+      <span class="lang-text-en">Murmur is a beautiful, encrypted chat-style diary. Capture your thoughts in message bubbles, let AI be your warm companion, and keep everything private on your device.</span>
+      <span class="lang-text-zh">喃喃是一款精美的加密聊天式日记。用消息气泡记录想法，让 AI 成为温暖的伙伴，一切都私密地保存在你的设备上。</span>
+    </p>
+    <div class="hero-buttons">
+      <a href="#pricing" class="btn-primary">
+        <span class="lang-text-en">Download Now &mdash; $9.90</span>
+        <span class="lang-text-zh">立即下载 &mdash; $9.90</span>
+      </a>
+      <a href="#features" class="btn-secondary">
+        <span class="lang-text-en">Learn More</span>
+        <span class="lang-text-zh">了解更多</span>
+      </a>
+    </div>
+    <p class="price-tag">
+      <span class="lang-text-en">One-time purchase of <strong>$9.90</strong>. Own it forever.</span>
+      <span class="lang-text-zh">一次购买 <strong>$9.90</strong>，永久拥有。</span>
+    </p>
     <div class="hero-screenshot">
-      <div class="screenshot-placeholder" data-i18n="placeholder.hero">
-        [Screenshot: Main chat interface — left sidebar with diary date list, right side showing chat bubbles with text messages, images, mood cards, and an AI reply. Green bubbles = user, white bubbles = AI. Warm beige background with seasonal cherry blossom particles.]
-      </div>
+      <img class="lang-img-en" src="images/chat-english.png" alt="Murmur chat interface">
+      <img class="lang-img-zh" src="images/chat-chinese.png" alt="喃喃聊天界面">
     </div>
   </div>
 </section>
@@ -300,98 +242,123 @@
 <section class="features" id="features">
   <div class="container">
     <div class="section-title fade-up">
-      <h2 data-i18n="features.title">Everything you need to journal</h2>
-      <p data-i18n="features.subtitle">A diary that feels like texting, with powerful features beneath the simplicity.</p>
+      <h2>
+        <span class="lang-text-en">Everything you need to journal</span>
+        <span class="lang-text-zh">写日记所需的一切</span>
+      </h2>
+      <p>
+        <span class="lang-text-en">A diary that feels like texting, with powerful features beneath the simplicity.</span>
+        <span class="lang-text-zh">看起来像聊天，内在功能强大。</span>
+      </p>
     </div>
     <div class="features-grid">
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#d4e8c2;">💬</div>
-        <h3 data-i18n="f.chat.title">Chat-Style Writing</h3>
-        <p data-i18n="f.chat.desc">Write diary entries as chat messages. Quick, natural, and low-pressure — just like texting a friend.</p>
+        <h3><span class="lang-text-en">Chat-Style Writing</span><span class="lang-text-zh">聊天式写作</span></h3>
+        <p><span class="lang-text-en">Write diary entries as chat bubbles. Quick, natural, and low-pressure — just like texting a friend. Send text, images, mood cards, and more.</span><span class="lang-text-zh">用聊天气泡写日记，快速、自然、无压力。支持文字、图片、心情卡片、引用回复，就像给朋友发消息。</span></p>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#e8dff5;">🤖</div>
-        <h3 data-i18n="f.ai.title">AI Companion</h3>
-        <p data-i18n="f.ai.desc">Get warm AI feedback on your day. Supports OpenAI, Anthropic, Google Gemini, DeepSeek, Ollama, and more.</p>
+        <h3><span class="lang-text-en">AI Companion</span><span class="lang-text-zh">AI 伙伴</span></h3>
+        <p><span class="lang-text-en">Tap the AI button and get a warm, thoughtful response to your day. Like talking to a friend who truly listens. Supports OpenAI, Claude, Gemini, DeepSeek, MiniMax, and Ollama.</span><span class="lang-text-zh">点击 AI 按钮，获得对你一天的温暖回应。就像和一位真正倾听你的朋友聊天。支持 OpenAI、Claude、Gemini、DeepSeek、MiniMax 和 Ollama。</span></p>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#f5e6d0;">🔒</div>
-        <h3 data-i18n="f.encrypt.title">End-to-End Encrypted</h3>
-        <p data-i18n="f.encrypt.desc">AES-256-GCM encryption with Argon2 key derivation. Your diary stays on your device, always encrypted.</p>
+        <h3><span class="lang-text-en">Military-Grade Encryption</span><span class="lang-text-zh">军事级加密</span></h3>
+        <p><span class="lang-text-en">AES-256-GCM field-level encryption with Argon2 key derivation. Your diary stays on your device, always encrypted. No cloud, no servers, no accounts.</span><span class="lang-text-zh">AES-256-GCM 逐字段加密，配合 Argon2 密钥派生。日记始终加密存储在你的设备上。没有云端，没有服务器，不需要注册。</span></p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon" style="background:#fce4ec;">🎭</div>
+        <h3><span class="lang-text-en">Decoy Space</span><span class="lang-text-zh">伪装空间</span></h3>
+        <p><span class="lang-text-en">Enter the wrong password and a separate, innocent-looking diary opens. No one can prove your real diary exists. Plausible deniability, built in.</span><span class="lang-text-zh">输入错误密码，会打开一个独立的、看起来无害的日记。没人能证明你的真实日记存在。合理否认性，与生俱来。</span></p>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#d0e8f5;">📝</div>
-        <h3 data-i18n="f.article.title">Long-Form Articles</h3>
-        <p data-i18n="f.article.desc">Switch to a rich Markdown editor for longer entries. Bold, headings, code blocks, images — all supported.</p>
+        <h3><span class="lang-text-en">Long-Form Articles</span><span class="lang-text-zh">长文写作</span></h3>
+        <p><span class="lang-text-en">Switch to a rich WYSIWYG Markdown editor for longer entries. Bold, headings, code blocks, images — all supported. Articles appear as cards in your chat flow.</span><span class="lang-text-zh">切换到所见即所得 Markdown 编辑器写长篇内容。支持加粗、标题、代码块、图片。文章以卡片形式嵌入聊天流。</span></p>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#f5d0d0;">😊</div>
-        <h3 data-i18n="f.mood.title">Mood Tracking</h3>
-        <p data-i18n="f.mood.desc">Record your mood with 10 beautiful emotion cards. Track your emotional journey over time.</p>
+        <h3><span class="lang-text-en">Mood Tracking</span><span class="lang-text-zh">心情记录</span></h3>
+        <p><span class="lang-text-en">Record your mood with 10 beautiful emotion cards. Multiple moods per day — morning happy, evening tired. Track your emotional journey over time.</span><span class="lang-text-zh">用 10 种精美的情绪卡片记录心情。每天可记录多次 —— 早上开心，晚上疲惫。追踪你的情感旅程。</span></p>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#d4f5d0;">🏷️</div>
-        <h3 data-i18n="f.tag.title">Tags & Search</h3>
-        <p data-i18n="f.tag.desc">Organize entries with custom color tags. Full-text search finds anything across your entire diary.</p>
-      </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#f5f0d0;">🏆</div>
-        <h3 data-i18n="f.badge.title">Achievements</h3>
-        <p data-i18n="f.badge.desc">Unlock 15 badges as you build your journaling habit. Watch your growth tree evolve from seedling to forest.</p>
+        <h3><span class="lang-text-en">Tags & Full-Text Search</span><span class="lang-text-zh">标签与全文搜索</span></h3>
+        <p><span class="lang-text-en">Organize entries with custom color-coded tags (Morandy palette). Full-text search across messages, articles, AI replies, and tags.</span><span class="lang-text-zh">用自定义莫兰迪色系标签整理日记。全文搜索覆盖消息、文章、AI 回复和标签。</span></p>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#d0f5f0;">📱</div>
-        <h3 data-i18n="f.telegram.title">Telegram Sync</h3>
-        <p data-i18n="f.telegram.desc">Send diary entries from Telegram anytime. Your messages are saved automatically to today's diary.</p>
+        <h3><span class="lang-text-en">Telegram Sync</span><span class="lang-text-zh">Telegram 同步</span></h3>
+        <p><span class="lang-text-en">Connect your Telegram bot and send diary entries on the go. Messages are saved automatically to today's diary with a source badge.</span><span class="lang-text-zh">连接 Telegram Bot，随时随地发送日记。消息自动保存到今天的日记，并标注来源。</span></p>
       </div>
       <div class="feature-card fade-up">
         <div class="feature-icon" style="background:#e8e0d4;">⚡</div>
-        <h3 data-i18n="f.capture.title">Quick Capture</h3>
-        <p data-i18n="f.capture.desc">Global hotkey summons a floating input. Type a thought, hit enter, done. Never lose a fleeting idea.</p>
+        <h3><span class="lang-text-en">Quick Capture</span><span class="lang-text-zh">快速记录</span></h3>
+        <p><span class="lang-text-en">Global hotkey (Cmd+Shift+M) summons a Spotlight-style floating input. Type a thought, hit enter, done. Never lose a fleeting idea.</span><span class="lang-text-zh">全局快捷键 (Cmd+Shift+M) 唤出 Spotlight 风格的浮动输入框。输入想法，回车，完成。灵感不再溜走。</span></p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon" style="background:#f5f0d0;">🏆</div>
+        <h3><span class="lang-text-en">Achievements & Growth Tree</span><span class="lang-text-zh">成就系统与成长之树</span></h3>
+        <p><span class="lang-text-en">Unlock 15 badges as you build your habit — from "First Entry" to "Night Owl" (3 AM writing). Watch your growth tree evolve from seedling to forest.</span><span class="lang-text-zh">坚持写日记解锁 15 枚徽章 —— 从"初次提笔"到"夜猫子"（凌晨3点写日记）。看你的成长之树从幼苗长成森林。</span></p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon" style="background:#e0d4f5;">🎲</div>
+        <h3><span class="lang-text-en">Random Memory</span><span class="lang-text-zh">随机回忆</span></h3>
+        <p><span class="lang-text-en">Roll the dice to resurface a random diary from the past. Like flipping through an old journal — full of surprises.</span><span class="lang-text-zh">掷骰子随机重温过去某天的日记。像翻旧日记本一样，充满惊喜。</span></p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon" style="background:#f5e0d4;">🌸</div>
+        <h3><span class="lang-text-en">Seasonal Atmosphere</span><span class="lang-text-zh">四季氛围</span></h3>
+        <p><span class="lang-text-en">Subtle ambient backgrounds shift with time of day. Delicate seasonal particles — cherry blossoms in spring, snowflakes in winter — float through your diary.</span><span class="lang-text-zh">背景随时间段微妙变化。轻柔的季节粒子效果 —— 春天樱花、冬天雪花 —— 飘过你的日记。</span></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Showcase -->
+<!-- Showcase: AI -->
 <section class="showcase">
   <div class="container">
     <div class="showcase-item fade-up">
       <div class="showcase-text">
-        <h3 data-i18n="s.dual.title">Decoy Space: Your Secret Shield</h3>
-        <p data-i18n="s.dual.desc1">Enter the wrong password and Murmur opens a completely separate public space — with its own diary entries. No one can tell your real diary exists.</p>
-        <p data-i18n="s.dual.desc2">Your private space is only accessible with the correct password. Even under pressure, your secrets stay safe.</p>
+        <h3>
+          <span class="lang-text-en">An AI That Truly Listens</span>
+          <span class="lang-text-zh">一个真正倾听你的 AI</span>
+        </h3>
+        <p>
+          <span class="lang-text-en">After writing your day, tap the AI button to get a thoughtful, warm response. It reads everything you wrote — text, moods, images — and replies like a supportive friend, not a robot.</span>
+          <span class="lang-text-zh">写完一天的内容后，点击 AI 按钮获得体贴温暖的回应。它读懂你写的一切 —— 文字、心情、图片 —— 像一个体贴的朋友而非机器人那样回复你。</span>
+        </p>
+        <p>
+          <span class="lang-text-en">Choose from 7 AI providers — OpenAI, Claude, Gemini, DeepSeek, MiniMax, or run 100% offline with Ollama. Customize the AI's personality in settings.</span>
+          <span class="lang-text-zh">7 种 AI 服务商可选 —— OpenAI、Claude、Gemini、DeepSeek、MiniMax，或用 Ollama 完全离线运行。在设置中自定义 AI 的性格。</span>
+        </p>
       </div>
-      <div class="showcase-screenshot">
-        <div class="screenshot-placeholder" data-i18n="placeholder.dual">
-          [Screenshot: Side-by-side comparison — Left: Login screen. Right top: Private space with real diary entries. Right bottom: Public/decoy space with innocent-looking entries. Arrow showing "correct password" and "wrong password" paths.]
-        </div>
-      </div>
-    </div>
-
-    <div class="showcase-item fade-up">
-      <div class="showcase-text">
-        <h3 data-i18n="s.ai.title">An AI That Listens</h3>
-        <p data-i18n="s.ai.desc1">After you write your day, tap the AI button to get a thoughtful response. Like talking to a warm, understanding friend.</p>
-        <p data-i18n="s.ai.desc2">Choose your AI provider — OpenAI, Claude, Gemini, DeepSeek, or run locally with Ollama. You own the conversation.</p>
-      </div>
-      <div class="showcase-screenshot">
-        <div class="screenshot-placeholder" data-i18n="placeholder.ai">
-          [Screenshot: Chat view showing several user messages about their day, followed by a warm AI summary/reply in a white bubble. The AI personality feels like a supportive friend, not a robot.]
-        </div>
+      <div class="showcase-img">
+        <img class="lang-img-en" src="images/chat-english.png" alt="AI reply in English">
+        <img class="lang-img-zh" src="images/chat-chinese.png" alt="AI 中文回复">
       </div>
     </div>
 
-    <div class="showcase-item fade-up">
+    <!-- Showcase: Decoy Space -->
+    <div class="showcase-item reverse fade-up">
       <div class="showcase-text">
-        <h3 data-i18n="s.media.title">Photos, Files & Memories</h3>
-        <p data-i18n="s.media.desc1">Drag and drop images, documents, audio, and video right into your diary. Everything is encrypted and stored locally.</p>
-        <p data-i18n="s.media.desc2">Browse your photo gallery, revisit favorites, or roll the dice to resurface a random memory from the past.</p>
+        <h3>
+          <span class="lang-text-en">Decoy Space: Your Secret Shield</span>
+          <span class="lang-text-zh">伪装空间：你的秘密护盾</span>
+        </h3>
+        <p>
+          <span class="lang-text-en">Enter the wrong password and Murmur opens a completely separate public diary — with its own entries. No one can tell your real diary exists. Even under pressure, your secrets stay safe.</span>
+          <span class="lang-text-zh">输入错误密码，喃喃会打开一个完全独立的公开日记 —— 有自己的内容。没人能发现你的真实日记存在。即使在压力下，你的秘密也安全无虞。</span>
+        </p>
+        <p>
+          <span class="lang-text-en">Your private space uses AES-256-GCM encryption with a master key protected by both your password and a recovery code — two independent locks on the same vault.</span>
+          <span class="lang-text-zh">你的私密空间使用 AES-256-GCM 加密，主密钥由密码和恢复码双重保护 —— 两把独立的锁守护同一个保险库。</span>
+        </p>
       </div>
-      <div class="showcase-screenshot">
-        <div class="screenshot-placeholder" data-i18n="placeholder.media">
-          [Screenshot: Gallery view showing a grid of photos from diary entries. Some with image lightbox open showing a larger preview. Clean, minimal grid layout.]
-        </div>
+      <div class="showcase-img">
+        <img class="lang-img-en" src="images/cover-english.png" alt="Murmur login screen">
+        <img class="lang-img-zh" src="images/cover-chinese.png" alt="喃喃登录界面">
       </div>
     </div>
   </div>
@@ -401,36 +368,42 @@
 <section class="security" id="security">
   <div class="container">
     <div class="section-title fade-up">
-      <h2 data-i18n="sec.title">Privacy by Design</h2>
-      <p data-i18n="sec.subtitle">Your diary is the most private thing you own. Murmur is built to keep it that way.</p>
+      <h2>
+        <span class="lang-text-en">Privacy by Design</span>
+        <span class="lang-text-zh">隐私至上的设计</span>
+      </h2>
+      <p>
+        <span class="lang-text-en">Your diary is the most private thing you own. Murmur is built to keep it that way.</span>
+        <span class="lang-text-zh">日记是你最私密的东西。喃喃从设计之初就以保护它为目标。</span>
+      </p>
     </div>
     <div class="security-grid">
       <div class="security-card fade-up">
         <div class="icon">🔐</div>
         <div>
-          <h4 data-i18n="sec.local.title">100% Local Storage</h4>
-          <p data-i18n="sec.local.desc">No cloud, no servers, no accounts. Your data lives on your machine and nowhere else.</p>
+          <h4><span class="lang-text-en">100% Local Storage</span><span class="lang-text-zh">100% 本地存储</span></h4>
+          <p><span class="lang-text-en">No cloud, no servers, no accounts. Your data lives on your machine and nowhere else. Export anytime as an encrypted backup.</span><span class="lang-text-zh">没有云端，没有服务器，不需要注册账号。数据只存在你的电脑上。随时导出加密备份。</span></p>
         </div>
       </div>
       <div class="security-card fade-up">
         <div class="icon">🛡️</div>
         <div>
-          <h4 data-i18n="sec.aes.title">AES-256-GCM Encryption</h4>
-          <p data-i18n="sec.aes.desc">Every entry is encrypted at the field level with military-grade encryption and Argon2 key derivation.</p>
+          <h4><span class="lang-text-en">AES-256-GCM + Argon2</span><span class="lang-text-zh">AES-256-GCM + Argon2</span></h4>
+          <p><span class="lang-text-en">Every entry is encrypted at the field level. Images are encrypted on disk with hashed filenames. Even thumbnails are stored in the encrypted database.</span><span class="lang-text-zh">每条日记逐字段加密。图片在磁盘上加密存储，文件名使用哈希。连缩略图也存储在加密数据库中。</span></p>
         </div>
       </div>
       <div class="security-card fade-up">
         <div class="icon">🎭</div>
         <div>
-          <h4 data-i18n="sec.decoy.title">Decoy Space</h4>
-          <p data-i18n="sec.decoy.desc">Wrong password opens a fake diary. No one can prove your real diary exists — plausible deniability built in.</p>
+          <h4><span class="lang-text-en">Plausible Deniability</span><span class="lang-text-zh">合理否认性</span></h4>
+          <p><span class="lang-text-en">Wrong password opens a decoy diary. Right password opens your real one. Two separate spaces, completely isolated. No one can prove the private space exists.</span><span class="lang-text-zh">错误密码打开伪装日记，正确密码打开真实日记。两个完全隔离的空间。没人能证明私密空间的存在。</span></p>
         </div>
       </div>
       <div class="security-card fade-up">
         <div class="icon">🔑</div>
         <div>
-          <h4 data-i18n="sec.recovery.title">Recovery Code</h4>
-          <p data-i18n="sec.recovery.desc">Forgot your password? Use the recovery code to regain access. No email, no phone, no third party involved.</p>
+          <h4><span class="lang-text-en">Recovery Code</span><span class="lang-text-zh">恢复码</span></h4>
+          <p><span class="lang-text-en">Forgot your password? Use the recovery code to regain access. No email, no phone, no third party. Password and recovery code are two independent locks on the same master key.</span><span class="lang-text-zh">忘记密码？用恢复码重新获取访问权限。无需邮箱、手机或任何第三方。密码和恢复码是同一主密钥上的两把独立的锁。</span></p>
         </div>
       </div>
     </div>
@@ -441,22 +414,34 @@
 <section class="pricing" id="pricing">
   <div class="container">
     <div class="section-title fade-up">
-      <h2 data-i18n="price.title">Simple, Honest Pricing</h2>
-      <p data-i18n="price.subtitle">Pay once, own it forever. No subscriptions, no hidden fees.</p>
+      <h2>
+        <span class="lang-text-en">Simple, Honest Pricing</span>
+        <span class="lang-text-zh">简单透明的定价</span>
+      </h2>
+      <p>
+        <span class="lang-text-en">Pay once, own it forever. No subscriptions, no hidden fees.</span>
+        <span class="lang-text-zh">一次购买，永久拥有。没有订阅，没有隐藏费用。</span>
+      </p>
     </div>
     <div class="pricing-card fade-up">
       <div class="price">$9.90</div>
-      <div class="price-period" data-i18n="price.period">One-time purchase</div>
+      <div class="price-period">
+        <span class="lang-text-en">One-time purchase</span>
+        <span class="lang-text-zh">一次性购买</span>
+      </div>
       <ul>
-        <li data-i18n="price.f1">All features included</li>
-        <li data-i18n="price.f2">Lifetime updates</li>
-        <li data-i18n="price.f3">macOS, Windows & Linux</li>
-        <li data-i18n="price.f4">Bring your own AI provider</li>
-        <li data-i18n="price.f5">No account required</li>
-        <li data-i18n="price.f6">No data collection</li>
+        <li><span class="lang-text-en">All features included</span><span class="lang-text-zh">包含全部功能</span></li>
+        <li><span class="lang-text-en">Lifetime updates</span><span class="lang-text-zh">终身免费更新</span></li>
+        <li><span class="lang-text-en">macOS, Windows &amp; Linux</span><span class="lang-text-zh">支持 macOS、Windows 和 Linux</span></li>
+        <li><span class="lang-text-en">Bring your own AI provider</span><span class="lang-text-zh">自由选择 AI 服务商</span></li>
+        <li><span class="lang-text-en">No account required</span><span class="lang-text-zh">无需注册账号</span></li>
+        <li><span class="lang-text-en">No data collection</span><span class="lang-text-zh">不收集任何数据</span></li>
       </ul>
-      <a href="#" class="btn-primary" data-i18n="price.cta">Buy Now</a>
-      <div class="platforms" style="margin-top:20px;">
+      <a href="#" class="btn-primary">
+        <span class="lang-text-en">Buy Now</span>
+        <span class="lang-text-zh">立即购买</span>
+      </a>
+      <div class="platforms">
         <span class="platform-badge">macOS</span>
         <span class="platform-badge">Windows</span>
         <span class="platform-badge">Linux</span>
@@ -471,123 +456,42 @@
     <div class="footer-content">
       <div class="footer-brand">
         <h3>Murmur 喃喃</h3>
-        <p data-i18n="footer.tagline">A private diary that feels like texting yourself.</p>
+        <p>
+          <span class="lang-text-en">A private diary that feels like texting yourself.</span>
+          <span class="lang-text-zh">一款像发消息一样写日记的私密日记本。</span>
+        </p>
       </div>
       <div class="footer-links">
-        <h4 data-i18n="footer.contact">Contact</h4>
+        <h4><span class="lang-text-en">Contact</span><span class="lang-text-zh">联系方式</span></h4>
         <a href="mailto:lolieatapple@gmail.com">lolieatapple@gmail.com</a>
         <a href="https://x.com/lolieatapple" target="_blank" rel="noopener">@lolieatapple on X</a>
       </div>
       <div class="footer-links">
-        <h4 data-i18n="footer.resources">Resources</h4>
+        <h4><span class="lang-text-en">Resources</span><span class="lang-text-zh">资源</span></h4>
         <a href="https://github.com/lolieatapple/chat-diary" target="_blank" rel="noopener">GitHub</a>
-        <a href="#pricing" data-i18n="footer.download">Download</a>
+        <a href="#pricing"><span class="lang-text-en">Download</span><span class="lang-text-zh">下载</span></a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 Murmur. <span data-i18n="footer.rights">All rights reserved.</span>
+      &copy; 2026 Murmur. <span class="lang-text-en">All rights reserved.</span><span class="lang-text-zh">保留所有权利。</span>
     </div>
   </div>
 </footer>
 
 <script>
-const zh = {
-  "nav.features": "功能",
-  "nav.security": "安全",
-  "nav.pricing": "价格",
-  "hero.badge": "隐私加密",
-  "hero.title": "像发消息一样写日记",
-  "hero.subtitle": "喃喃是一款精美的加密聊天式日记。用消息气泡记录想法，让 AI 成为温暖的伙伴，一切都私密地保存在你的设备上。",
-  "hero.cta": "立即下载 — $9.90",
-  "hero.learn": "了解更多",
-  "hero.price": "一次购买 <strong>$9.90</strong>，永久拥有。",
-  "placeholder.hero": "[截图：主聊天界面 — 左侧日记日期列表，右���显示文���消息、图片、心情卡片和 AI 回复的聊天气泡。绿色气泡 = 用户，白色���泡 = AI。温暖的米色背景，带有季节性樱花粒子效果。]",
-  "features.title": "写日记所需的一切",
-  "features.subtitle": "看起来像聊天，内在功能强大。",
-  "f.chat.title": "聊天式写作",
-  "f.chat.desc": "用聊天消息的方式写日记，快速、自然、无压力 —— 就像给朋友发消息。",
-  "f.ai.title": "AI 伙伴",
-  "f.ai.desc": "获得 AI 对你一天的温暖回应。支持 OpenAI、Anthropic、Google Gemini、DeepSeek、Ollama 等。",
-  "f.encrypt.title": "端到端加密",
-  "f.encrypt.desc": "AES-256-GCM 加密配合 Argon2 密钥派生。日记始终加密存储在你的设备上。",
-  "f.article.title": "长文写作",
-  "f.article.desc": "切换到富文本 Markdown 编辑器写长篇内容。支持加粗、标题、代码块、图片等。",
-  "f.mood.title": "心情记录",
-  "f.mood.desc": "用 10 种精美的情绪卡片记录心情，追踪你的情感旅程。",
-  "f.tag.title": "标签与搜索",
-  "f.tag.desc": "用自定义彩色标签整理日��。全文搜索轻松找到任何内容。",
-  "f.badge.title": "成就系统",
-  "f.badge.desc": "坚持写日记解锁 15 枚徽章，看你的成长之树从幼苗长成森林。",
-  "f.telegram.title": "Telegram 同步",
-  "f.telegram.desc": "随时从 Telegram 发送日记内容，消息自动保存到今天���日记。",
-  "f.capture.title": "快速记录",
-  "f.capture.desc": "全局快捷键唤出浮动输入框，输入想法，回车，完成。灵感不再溜走。",
-  "s.dual.title": "伪装空间：你的秘密护盾",
-  "s.dual.desc1": "输入错误密码，喃喃会打开一个完全独立的公开空间 —— 有自己的日记内容。没人能发现你的真实日记。",
-  "s.dual.desc2": "私密空间只有正确密码才能访问。即使在压力下，你的秘密也安全无虞。",
-  "placeholder.dual": "[截图：左右对比 — 左：登录界面。右上：正确密码进入的私密空间，显示真实日记。右下：错误密码进入的伪装空间，显示无关紧要的内容。箭头标注"正确密���"和"错误密码"的路径。]",
-  "s.ai.title": "一个会倾听的 AI",
-  "s.ai.desc1": "写完一天的内容后，点击 AI 按钮获得体贴的回应。就像和一位温暖、理解你的朋友聊天。",
-  "s.ai.desc2": "自由选择 AI 服务商 —— OpenAI、Claude、Gemini、DeepSeek，或用 Ollama 本地运行。对话由你掌控。",
-  "placeholder.ai": "[截图：聊天视图中用户写了几条关于今天的消息，下方是 AI 在白色气泡中温暖的总结/回复。AI 的风格像一个体贴的朋友，而不是机器人。]",
-  "s.media.title": "照片、文件与回忆",
-  "s.media.desc1": "直接拖放图片、文档、音频和视频到日记中。所有内容加密存储在本地。",
-  "s.media.desc2": "浏览照片画廊、回顾收藏，或掷骰子随机重温过去的某段记忆。",
-  "placeholder.media": "[截图：画廊视图，展示日记中的照片网格。部分图片打开了大图预览。简洁的网格布局。]",
-  "sec.title": "隐私至上的设计",
-  "sec.subtitle": "日记是你最私密的东西。喃喃从设计之初就以保护它为目标。",
-  "sec.local.title": "100% 本地存储",
-  "sec.local.desc": "没有云端，没有服务器，不需要注册账号。数据只存在你的电脑上。",
-  "sec.aes.title": "AES-256-GCM 加密",
-  "sec.aes.desc": "每条日记都使用军事级加密逐字段加密，配合 Argon2 密钥派生。",
-  "sec.decoy.title": "伪装空间",
-  "sec.decoy.desc": "错误密码��开假日记。没人能证明你的真实日记存在 —— 内置合理否认性。",
-  "sec.recovery.title": "恢复码",
-  "sec.recovery.desc": "忘记密码？用恢复码重新获取访问权限。无需邮箱、手机或任何第三方。",
-  "price.title": "简单透明的定价",
-  "price.subtitle": "一次购买，永久拥有。没有订阅，没有隐藏费用。",
-  "price.period": "一次性购买",
-  "price.f1": "包含全部功能",
-  "price.f2": "终身免费更新",
-  "price.f3": "支持 macOS、Windows 和 Linux",
-  "price.f4": "自带 AI 服务商",
-  "price.f5": "无需注册账号",
-  "price.f6": "不收集任何数据",
-  "price.cta": "立即购买",
-  "footer.tagline": "一款像发消息一样写日记的私密日记本。",
-  "footer.contact": "联系方式",
-  "footer.resources": "资源",
-  "footer.download": "下载",
-  "footer.rights": "保留所有权利。",
-};
-
-let currentLang = "en";
-
 function toggleLang() {
-  currentLang = currentLang === "en" ? "zh" : "en";
-  document.querySelector(".lang-btn").textContent = currentLang === "en" ? "中文" : "English";
-  document.documentElement.lang = currentLang === "en" ? "en" : "zh";
-
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (currentLang === "zh" && zh[key]) {
-      if (!el._origHTML) el._origHTML = el.innerHTML;
-      el.innerHTML = zh[key];
-    } else if (el._origHTML) {
-      el.innerHTML = el._origHTML;
-    }
-  });
+  const body = document.body;
+  const current = body.getAttribute("data-lang");
+  const next = current === "en" ? "zh" : "en";
+  body.setAttribute("data-lang", next);
+  document.documentElement.lang = next;
+  document.querySelector(".lang-btn").textContent = next === "en" ? "中文" : "English";
 }
 
 // Scroll animations
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
 }, { threshold: 0.1 });
-
 document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
 
 // Smooth scroll
@@ -598,6 +502,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: "smooth" });
   });
 });
+
+// Auto-detect language
+if (navigator.language.startsWith("zh")) toggleLang();
 </script>
 
 </body>
