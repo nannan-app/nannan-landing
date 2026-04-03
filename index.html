@@ -3,8 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Murmur - Your Private Chat Diary</title>
-  <meta name="description" content="Murmur is a beautiful, encrypted chat-style diary app. Write like you're texting yourself. Private, local, and AI-powered.">
+  <title>Murmur - Private Encrypted Chat Diary App | 喃喃 - 加密聊天日记</title>
+  <meta name="description" content="Murmur is a beautiful, encrypted chat-style diary app for macOS, Windows and Linux. Write like you're texting yourself. AES-256 encryption, AI companion, mood tracking, and Telegram sync. Your diary never leaves your device.">
+  <meta name="keywords" content="diary app, journal app, encrypted diary, private journal, chat diary, AI diary, mood tracker, Murmur, 喃喃, 日记, 加密日记, 聊天日记, macOS diary app, Windows diary app, Linux diary app, Tauri app, local-first, offline diary">
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nannan.app">
+  <meta property="og:title" content="Murmur - Private Encrypted Chat Diary App">
+  <meta property="og:description" content="Write like you're texting yourself. A beautiful, encrypted chat-style diary with AI companion. 100% local, no cloud.">
+  <meta property="og:image" content="https://nannan.app/images/chat-english.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:site_name" content="Murmur 喃喃">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@lolieatapple">
+  <meta name="twitter:title" content="Murmur - Private Encrypted Chat Diary App">
+  <meta name="twitter:description" content="Write like you're texting yourself. Encrypted, AI-powered, 100% local.">
+  <meta name="twitter:image" content="https://nannan.app/images/chat-english.png">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://nannan.app">
+
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -568,6 +590,45 @@
     </div>
   </div>
 </footer>
+
+<!-- Structured Data for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Murmur",
+  "alternateName": "喃喃",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "macOS, Windows, Linux",
+  "offers": {
+    "@type": "Offer",
+    "price": "9.90",
+    "priceCurrency": "USD",
+    "url": "https://lolieatapple.gumroad.com/l/murmur"
+  },
+  "description": "A beautiful, encrypted chat-style diary app. Write like you're texting yourself. AES-256 encryption, AI companion, 100% local storage.",
+  "url": "https://nannan.app",
+  "image": "https://nannan.app/images/chat-english.png",
+  "author": {
+    "@type": "Person",
+    "name": "Lin Mo",
+    "url": "https://x.com/lolieatapple"
+  },
+  "featureList": [
+    "Chat-style diary writing",
+    "AES-256-GCM encryption",
+    "AI companion (OpenAI, Claude, Gemini, DeepSeek, MiniMax, Ollama)",
+    "Decoy space with plausible deniability",
+    "Mood tracking with 10 emotion cards",
+    "Telegram sync",
+    "Quick capture global hotkey",
+    "Markdown long-form articles",
+    "Full-text search",
+    "Achievement system with growth tree",
+    "100% local storage, no cloud"
+  ]
+}
+</script>
 
 <script>
 function toggleLang() {
