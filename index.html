@@ -156,6 +156,29 @@
     .security-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
     .security-card p { font-size: 14px; color: var(--text-secondary); }
 
+    /* AI Providers */
+    .ai-providers { padding: 80px 0; }
+    .ai-notice {
+      max-width: 800px; margin: 0 auto 48px; padding: 24px 32px;
+      background: linear-gradient(135deg, #f0fbe8 0%, #e8f4f0 100%);
+      border: 1px solid #c8e0b8; border-radius: 14px;
+      text-align: center; font-size: 15px; color: var(--text); line-height: 1.7;
+    }
+    .ai-notice strong { color: var(--accent); }
+    .provider-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      max-width: 720px; margin: 0 auto;
+    }
+    .provider-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px 16px; text-align: center; transition: all 0.3s;
+    }
+    .provider-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .provider-card .provider-icon { font-size: 32px; margin-bottom: 10px; }
+    .provider-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .provider-card p { font-size: 12px; color: var(--text-secondary); }
+    @media (max-width: 768px) { .provider-grid { grid-template-columns: repeat(2, 1fr); } }
+
     /* Pricing */
     .pricing { padding: 100px 0; text-align: center; }
     .pricing-card {
@@ -418,6 +441,59 @@
           <h4><span class="lang-text-en">Recovery Code</span><span class="lang-text-zh">恢复码</span></h4>
           <p><span class="lang-text-en">Forgot your password? Use the recovery code to regain access. No email, no phone, no third party. Password and recovery code are two independent locks on the same master key.</span><span class="lang-text-zh">忘记密码？用恢复码重新获取访问权限。无需邮箱、手机或任何第三方。密码和恢复码是同一主密钥上的两把独立的锁。</span></p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI Providers -->
+<section class="ai-providers" id="ai-providers">
+  <div class="container">
+    <div class="section-title fade-up">
+      <h2>
+        <span class="lang-text-en">Bring Your Own AI</span>
+        <span class="lang-text-zh">自带你的 AI</span>
+      </h2>
+    </div>
+    <div class="ai-notice fade-up">
+      <span class="lang-text-en">To protect your privacy, Murmur <strong>never routes your data through our servers</strong>. All AI features require you to configure your own API provider and key. Your diary content is sent directly from your device to the AI provider you choose — we never see it.</span>
+      <span class="lang-text-zh">为了保护你的隐私，喃喃<strong>绝不会将你的数据经过我们的服务器</strong>。所有 AI 功能都需要你自行配置 API 服务商和密钥。你的日记内容直接从你的设备发送到你选择的 AI 服务商 —— 我们永远看不到。</span>
+    </div>
+    <div class="provider-grid">
+      <div class="provider-card fade-up">
+        <div class="provider-icon">🟢</div>
+        <h4>OpenAI</h4>
+        <p>GPT-4o, GPT-4o-mini</p>
+      </div>
+      <div class="provider-card fade-up">
+        <div class="provider-icon">🟠</div>
+        <h4>Anthropic</h4>
+        <p>Claude Sonnet, Opus</p>
+      </div>
+      <div class="provider-card fade-up">
+        <div class="provider-icon">🔵</div>
+        <h4>Google Gemini</h4>
+        <p>Gemini 2.0 Flash</p>
+      </div>
+      <div class="provider-card fade-up">
+        <div class="provider-icon">🟣</div>
+        <h4>DeepSeek</h4>
+        <p>DeepSeek Chat</p>
+      </div>
+      <div class="provider-card fade-up">
+        <div class="provider-icon">🔴</div>
+        <h4>MiniMax</h4>
+        <p>MiniMax-M2.7</p>
+      </div>
+      <div class="provider-card fade-up">
+        <div class="provider-icon">⚪</div>
+        <h4>Ollama</h4>
+        <p><span class="lang-text-en">100% Local / Offline</span><span class="lang-text-zh">100% 本地离线</span></p>
+      </div>
+      <div class="provider-card fade-up">
+        <div class="provider-icon">⚙️</div>
+        <h4><span class="lang-text-en">Custom</span><span class="lang-text-zh">自定义</span></h4>
+        <p><span class="lang-text-en">Any OpenAI-compatible API</span><span class="lang-text-zh">任何 OpenAI 兼容 API</span></p>
       </div>
     </div>
   </div>
