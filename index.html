@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -32,585 +32,885 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
+    /* 喃喃 Redesign — Warm Paper / Journal */
     :root {
-      --accent: #7c6f5b;
-      --accent-light: #a89880;
-      --bg: #faf8f5;
-      --bg-warm: #f5f0ea;
-      --text: #3d3929;
-      --text-secondary: #8c8478;
-      --border: #e8e0d4;
-      --green-bubble: #d4e8c2;
-      --radius: 16px;
-      --max-w: 1120px;
+      /* Warm paper palette */
+      --paper-0: #fbf7f0;
+      --paper-50: #f7f1e6;
+      --paper-100: #f0e8d8;
+      --paper-200: #e8decb;
+      --paper-300: #d8cab0;
+      --paper-400: #bfac8b;
+
+      --ink-900: #2b2520;
+      --ink-800: #3e352d;
+      --ink-700: #574a3e;
+      --ink-600: #7a6a5a;
+      --ink-500: #9b8a76;
+      --ink-400: #b9a994;
+      --ink-300: #d4c6b0;
+
+      --user-ink: #6b4a2a;
+      --user-stroke: #8c6a4a;
+      --user-bg: #f7efe0;
+
+      --ai-ink: #574a3e;
+      --ai-stroke: #b8a588;
+      --ai-bg: #fdf9f1;
+
+      --sage: oklch(0.72 0.07 140);
+      --sage-deep: oklch(0.52 0.08 140);
+      --clay: oklch(0.62 0.09 50);
+      --rose: oklch(0.72 0.07 25);
+      --dusk: oklch(0.62 0.07 260);
+      --ochre: oklch(0.72 0.1 80);
+
+      --font-sans: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-serif: 'Fraunces', 'Noto Serif SC', Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
-      background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden;
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: var(--font-sans);
+      color: var(--ink-900);
+      background: var(--paper-0);
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01", "cv11";
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      line-height: 1.65;
     }
-    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; font-size: inherit; color: inherit; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+    /* Language switching */
+    .en, .zh { display: none; }
+    body[data-lang="en"] .en { display: inline; }
+    body[data-lang="zh"] .zh { display: inline; }
+    body[data-lang="en"] .en-block { display: block; }
+    body[data-lang="zh"] .zh-block { display: block; }
+    .en-block, .zh-block { display: none; }
 
     /* Nav */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250, 248, 245, 0.85); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+    nav.top {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px;
+      background: rgba(251,247,240,0.8); backdrop-filter: blur(14px) saturate(160%);
+      border-bottom: 1px solid var(--paper-200);
     }
-    nav .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .nav-logo { font-size: 20px; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 8px; }
-    .nav-logo span { font-size: 14px; color: var(--text-secondary); font-weight: 400; }
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 14px; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
-    .lang-btn {
-      background: var(--bg-warm); border: 1px solid var(--border);
-      padding: 6px 12px; border-radius: 8px; font-size: 13px;
-      cursor: pointer; color: var(--text-secondary); transition: all 0.2s;
+    nav.top .container { display: flex; align-items: center; height: 100%; gap: 28px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-seal {
+      width: 30px; height: 30px; border-radius: 999px;
+      background: var(--ink-900); color: var(--paper-0);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: 14px; font-weight: 500;
     }
-    .lang-btn:hover { background: var(--border); color: var(--text); }
+    .brand-name { font-family: var(--font-serif); font-size: 17px; color: var(--ink-900); font-weight: 500; letter-spacing: -0.01em; }
+    .brand-name em { font-style: italic; color: var(--ink-500); font-size: 13px; font-weight: 400; margin-left: 6px; }
+    nav .spacer { flex: 1; }
+    nav .links { display: flex; gap: 22px; font-size: 13px; color: var(--ink-600); font-family: var(--font-serif); font-style: italic; }
+    nav .links a:hover { color: var(--ink-900); }
+    nav .lang-btn {
+      padding: 5px 12px; border-radius: 999px; border: 1px solid var(--paper-300);
+      background: transparent; cursor: pointer; font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing: 0.1em;
+    }
+
+    /* Section rhythm */
+    section { position: relative; padding: 120px 0; }
+    section.tight { padding: 80px 0; }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--ink-500); margin-bottom: 20px;
+    }
+    h1.display {
+      font-family: var(--font-serif); font-weight: 400;
+      font-size: clamp(44px, 7vw, 84px); line-height: 1.02;
+      letter-spacing: -0.025em; color: var(--ink-900); margin: 0;
+    }
+    h1.display em { font-style: italic; color: var(--clay); font-weight: 400; }
+    h2.section {
+      font-family: var(--font-serif); font-weight: 400;
+      font-size: clamp(32px, 4.5vw, 52px); line-height: 1.08;
+      letter-spacing: -0.02em; color: var(--ink-900); margin: 0 0 16px;
+    }
+    h2.section em { font-style: italic; color: var(--clay); }
+    .lede { font-family: var(--font-serif); font-style: italic; color: var(--ink-600); font-size: 19px; max-width: 640px; line-height: 1.55; }
 
     /* Hero */
-    .hero { padding: 140px 0 80px; text-align: center; }
+    section.hero { padding-top: 160px; padding-bottom: 80px; overflow: hidden; }
+    .hero-wrap { position: relative; }
+    .hero-glow-1 { position: absolute; top: -100px; right: -200px; width: 700px; height: 700px;
+                    background: radial-gradient(circle, rgba(232,181,100,0.22) 0%, transparent 60%); pointer-events: none; }
+    .hero-glow-2 { position: absolute; top: 200px; left: -180px; width: 500px; height: 500px;
+                    background: radial-gradient(circle, rgba(156,184,156,0.18) 0%, transparent 60%); pointer-events: none; }
+    .hero-copy { position: relative; z-index: 2; text-align: left; max-width: 820px; }
     .hero-badge {
-      display: inline-block; background: var(--green-bubble);
-      color: var(--accent); font-size: 13px; font-weight: 500;
-      padding: 6px 16px; border-radius: 20px; margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px;
+      background: var(--paper-0); border: 1px solid var(--paper-300);
+      font-family: var(--font-serif); font-style: italic; font-size: 13px; color: var(--ink-700); margin-bottom: 32px;
     }
-    .hero h1 {
-      font-size: clamp(36px, 5vw, 56px); font-weight: 700; line-height: 1.2; margin-bottom: 20px;
-      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero-badge .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--sage-deep); }
+    .hero-actions { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 13px 26px;
+      border-radius: 999px; font-size: 14.5px; font-weight: 500;
+      cursor: pointer; transition: transform 0.15s;
     }
-    .hero p.subtitle { font-size: 18px; color: var(--text-secondary); max-width: 560px; margin: 0 auto 40px; }
-    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--accent); color: white; border: none;
-      padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 600;
-      cursor: pointer; transition: all 0.2s; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 8px;
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary { background: var(--ink-900); color: var(--paper-0); }
+    .btn.outline { background: transparent; color: var(--ink-900); border: 1.5px solid var(--ink-800); }
+    .price-note {
+      font-family: var(--font-serif); font-style: italic; color: var(--ink-500); font-size: 14px; margin-top: 20px;
     }
-    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
-    .btn-secondary {
-      background: transparent; color: var(--text); border: 1px solid var(--border);
-      padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 500;
-      cursor: pointer; transition: all 0.2s; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-secondary:hover { background: var(--bg-warm); }
-    .price-tag { font-size: 14px; color: var(--text-secondary); margin-top: 12px; }
-    .price-tag strong { color: var(--accent); font-size: 18px; }
+    .price-note strong { font-style: normal; color: var(--clay); font-family: var(--font-mono); font-size: 13px; }
 
-    /* Screenshots */
-    .hero-screenshot {
-      margin: 60px auto 0; max-width: 900px;
-      border-radius: 16px; overflow: hidden;
-      box-shadow:
-        0 0 0 1px var(--border),
-        0 20px 60px rgba(0,0,0,0.12),
-        0 0 80px rgba(124, 111, 91, 0.08),
-        0 0 120px rgba(212, 232, 194, 0.15);
+    /* Hero app mock */
+    .hero-mock-wrap { margin-top: 80px; position: relative; }
+    .hero-mock {
+      background: var(--paper-0); border-radius: 14px; overflow: hidden;
+      box-shadow: 0 40px 100px rgba(90,60,30,0.18), 0 0 0 1px var(--paper-200);
+      margin: 0 auto; max-width: 1040px;
     }
-    .hero-screenshot img { width: 100%; display: block; margin-top: -1px; }
-    .showcase-img {
-      box-shadow:
-        0 0 0 1px var(--border),
-        0 12px 40px rgba(0,0,0,0.1),
-        0 0 60px rgba(124, 111, 91, 0.06),
-        0 0 80px rgba(212, 232, 194, 0.1);
+    .mock-chrome {
+      height: 32px; background: #e8e2d6; display: flex; align-items: center;
+      padding: 0 14px; gap: 8px; border-bottom: 1px solid var(--paper-300);
     }
+    .mock-dot { width: 11px; height: 11px; border-radius: 999px; }
+    .mock-chrome .title { flex: 1; text-align: center; font-size: 11.5px; color: var(--ink-600); font-family: var(--font-serif); font-style: italic; }
+    .mock-body { display: flex; height: 560px; }
+    .mock-rail { width: 56px; background: var(--paper-50); border-right: 1px solid var(--paper-200); display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 4px; }
+    .mock-rail-item { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--ink-600); }
+    .mock-rail-item.active { background: var(--paper-100); color: var(--ink-900); }
+    .mock-side { width: 220px; background: var(--paper-50); border-right: 1px solid var(--paper-200); padding: 16px 14px; }
+    .mock-side-title { font-family: var(--font-serif); font-size: 14px; color: var(--ink-900); font-weight: 500; margin-bottom: 6px; }
+    .mock-side-sub { font-size: 11px; color: var(--ink-500); font-family: var(--font-mono); letter-spacing: 0.1em; margin-bottom: 14px; }
+    .mock-day { padding: 8px 10px; border-radius: 8px; font-size: 12.5px; color: var(--ink-700); display: flex; align-items: baseline; justify-content: space-between; }
+    .mock-day.active { background: var(--paper-100); color: var(--ink-900); }
+    .mock-day .num { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-400); }
+    .mock-main { flex: 1; padding: 20px 32px; overflow: hidden; }
+    .mock-date { text-align: center; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: var(--ink-600); padding-bottom: 14px; border-bottom: 1px dashed var(--paper-300); margin-bottom: 18px; }
+    .mock-bubble-row { display: flex; margin-bottom: 12px; }
+    .mock-bubble-row.user { justify-content: flex-end; }
+    .mock-bubble {
+      max-width: 72%; padding: 10px 14px; border-radius: 13px;
+      font-family: var(--font-serif); font-size: 13.5px; line-height: 1.65;
+    }
+    .mock-bubble.user { background: var(--user-bg); color: var(--user-ink); border: 1px solid var(--user-stroke); }
+    .mock-bubble.ai { background: var(--ai-bg); color: var(--ai-ink); border: 1px solid var(--ai-stroke); }
+    .mock-time { font-size: 9.5px; color: var(--ink-400); font-family: var(--font-mono); text-align: right; margin-top: 3px; }
 
-    /* Language switching — images */
-    .lang-img-en, .lang-img-zh { display: none !important; }
-    body[data-lang="en"] .lang-img-en { display: block !important; }
-    body[data-lang="zh"] .lang-img-zh { display: block !important; }
-    /* Language switching — text */
-    .lang-text-en, .lang-text-zh { display: none !important; }
-    body[data-lang="en"] .lang-text-en { display: inline !important; }
-    body[data-lang="zh"] .lang-text-zh { display: inline !important; }
+    .stat-row { display: flex; gap: 36px; margin-top: 56px; flex-wrap: wrap; }
+    .stat .n { font-family: var(--font-serif); font-size: 30px; color: var(--ink-900); font-weight: 500; letter-spacing: -0.02em; }
+    .stat .l { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-500); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 2px; }
 
-    /* Section */
-    .section-title { text-align: center; margin-bottom: 60px; }
-    .section-title h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
-    .section-title p { font-size: 16px; color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
+    /* Features */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--paper-200);
+      border: 1px solid var(--paper-200); border-radius: 16px; overflow: hidden; margin-top: 60px;
+    }
+    .feature {
+      background: var(--paper-0); padding: 32px 28px; min-height: 220px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .feature .num { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.2em; color: var(--ink-400); }
+    .feature .glyph {
+      width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    }
+    .feature h3 { font-family: var(--font-serif); font-size: 20px; color: var(--ink-900); font-weight: 500; letter-spacing: -0.01em; margin: 0; }
+    .feature p { font-size: 13.5px; color: var(--ink-600); line-height: 1.65; margin: 0; }
 
-    /* Features grid */
-    .features { padding: 100px 0; }
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .feature-card {
-      background: white; border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 32px; transition: all 0.3s;
+    /* Showcase alternating */
+    .showcase-item { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 120px; }
+    .showcase-item.reverse { grid-template-columns: 1fr 1fr; }
+    .showcase-item.reverse > :first-child { order: 2; }
+    .showcase-item h3 { font-family: var(--font-serif); font-size: 40px; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink-900); margin: 0 0 20px; }
+    .showcase-item h3 em { font-style: italic; color: var(--clay); }
+    .showcase-item p { font-family: var(--font-serif); font-size: 16px; color: var(--ink-700); line-height: 1.7; margin: 0 0 14px; max-width: 480px; }
+    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 999px; border: 1px solid var(--paper-300);
+      font-size: 12px; color: var(--ink-700); font-family: var(--font-serif);
     }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
-    .feature-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; margin-bottom: 16px;
-    }
-    .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-    .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
-
-    /* Showcase */
-    .showcase { padding: 80px 0; }
-    .showcase-item {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-      align-items: center; margin-bottom: 100px;
-    }
-    .showcase-item.reverse { direction: rtl; }
-    .showcase-item.reverse > * { direction: ltr; }
-    .showcase-text h3 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
-    .showcase-text p { font-size: 16px; color: var(--text-secondary); margin-bottom: 12px; }
-    .showcase-img {
-      border-radius: 12px; overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px var(--border);
-    }
-    .showcase-img img { width: 100%; display: block; }
+    .chip .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--sage-deep); }
 
     /* Security */
-    .security { padding: 80px 0; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%); }
-    .security-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px; }
-    .security-card {
-      background: white; border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 28px; display: flex; gap: 16px;
+    .security-bg { background: linear-gradient(180deg, var(--paper-0) 0%, var(--paper-50) 100%); }
+    .security-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 56px; }
+    .sec-card {
+      background: var(--paper-0); border: 1px solid var(--paper-200); border-radius: 14px;
+      padding: 28px 28px; display: flex; gap: 18px; align-items: flex-start;
     }
-    .security-card .icon { font-size: 28px; flex-shrink: 0; }
-    .security-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-    .security-card p { font-size: 14px; color: var(--text-secondary); }
+    .sec-card .sec-seal {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      background: var(--paper-50); border: 1px solid var(--paper-300);
+      display: flex; align-items: center; justify-content: center; color: var(--ink-700);
+    }
+    .sec-card h4 { font-family: var(--font-serif); font-size: 19px; color: var(--ink-900); font-weight: 500; margin: 0 0 6px; letter-spacing: -0.01em; }
+    .sec-card p { font-size: 13.5px; color: var(--ink-600); line-height: 1.65; margin: 0; }
 
-    /* AI Providers */
-    .ai-providers { padding: 80px 0; }
+    /* AI providers */
     .ai-notice {
-      max-width: 800px; margin: 0 auto 48px; padding: 24px 32px;
-      background: linear-gradient(135deg, #f0fbe8 0%, #e8f4f0 100%);
-      border: 1px solid #c8e0b8; border-radius: 14px;
-      text-align: center; font-size: 15px; color: var(--text); line-height: 1.7;
+      max-width: 780px; margin: 0 auto 56px;
+      padding: 22px 28px; background: var(--paper-0);
+      border: 1px dashed var(--paper-300); border-radius: 14px;
+      font-family: var(--font-serif); font-size: 15px; color: var(--ink-700); line-height: 1.7;
+      text-align: center;
     }
-    .ai-notice strong { color: var(--accent); }
+    .ai-notice strong { font-style: italic; color: var(--clay); font-weight: 500; }
     .provider-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-      max-width: 720px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 820px; margin: 0 auto;
     }
-    .provider-card {
-      background: white; border: 1px solid var(--border); border-radius: 12px;
-      padding: 24px 16px; text-align: center; transition: all 0.3s;
+    .provider {
+      background: var(--paper-0); border: 1px solid var(--paper-200); border-radius: 12px;
+      padding: 22px 14px; text-align: center;
     }
-    .provider-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
-    .provider-card .provider-icon { width: 40px; height: 40px; margin: 0 auto 10px; }
-    .provider-card .provider-icon img, .provider-card .provider-icon svg { width: 100%; height: 100%; }
-    .provider-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .provider-card p { font-size: 12px; color: var(--text-secondary); }
-    @media (max-width: 768px) { .provider-grid { grid-template-columns: repeat(2, 1fr); } }
+    .provider .ic { width: 36px; height: 36px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; }
+    .provider .ic img { max-width: 100%; max-height: 100%; }
+    .provider h4 { font-family: var(--font-serif); font-size: 14.5px; font-weight: 500; color: var(--ink-900); margin: 0 0 3px; }
+    .provider p { font-size: 11px; color: var(--ink-500); font-family: var(--font-mono); letter-spacing: 0.05em; margin: 0; }
 
     /* Pricing */
-    .pricing { padding: 100px 0; text-align: center; }
-    .pricing-card {
-      max-width: 420px; margin: 40px auto 0; background: white;
-      border: 2px solid var(--accent); border-radius: 20px; padding: 48px 40px;
-      box-shadow: 0 12px 40px rgba(124, 111, 91, 0.12);
+    .pricing-bg {
+      position: relative;
+      background: linear-gradient(180deg, var(--paper-50) 0%, var(--paper-100) 100%);
     }
-    .pricing-card .price { font-size: 48px; font-weight: 700; color: var(--accent); }
-    .pricing-card .price-period { font-size: 16px; color: var(--text-secondary); margin-bottom: 24px; }
-    .pricing-card ul { list-style: none; text-align: left; margin-bottom: 32px; }
-    .pricing-card li { padding: 8px 0; font-size: 15px; display: flex; align-items: center; gap: 10px; }
-    .pricing-card li::before { content: "\2713"; color: var(--accent); font-weight: 700; }
-    .pricing-card .btn-primary { width: 100%; justify-content: center; }
-    .platforms { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
-    .platform-badge {
-      background: var(--bg-warm); border: 1px solid var(--border);
-      padding: 8px 16px; border-radius: 8px; font-size: 13px; color: var(--text-secondary);
+    .pricing-card {
+      max-width: 480px; margin: 0 auto;
+      background: var(--paper-0); border-radius: 18px; padding: 48px 44px;
+      border: 1px solid var(--paper-300);
+      box-shadow: 0 30px 80px rgba(90,60,30,0.15);
+      position: relative; overflow: hidden;
+    }
+    .pricing-card::before {
+      content: ''; position: absolute; top: -120px; right: -120px; width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(232,181,100,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-stamp {
+      display: inline-block; padding: 4px 14px; border-radius: 999px;
+      background: var(--paper-100); border: 1px solid var(--paper-300);
+      font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.2em;
+      color: var(--ink-600); margin-bottom: 18px;
+    }
+    .price-big {
+      font-family: var(--font-serif); font-size: 72px; font-weight: 400;
+      color: var(--ink-900); line-height: 1; letter-spacing: -0.03em;
+    }
+    .price-big em { font-style: italic; color: var(--clay); font-size: 28px; vertical-align: top; margin-right: 2px; font-weight: 400; }
+    .price-per { font-family: var(--font-serif); font-style: italic; color: var(--ink-500); font-size: 15px; margin-top: 6px; }
+    .price-ul { list-style: none; padding: 0; margin: 28px 0 30px; display: flex; flex-direction: column; gap: 2px; }
+    .price-ul li {
+      display: flex; align-items: center; gap: 10px; padding: 8px 0;
+      border-bottom: 1px dashed var(--paper-200);
+      font-size: 14px; color: var(--ink-700); font-family: var(--font-serif);
+    }
+    .price-ul li:last-child { border: none; }
+    .price-ul li::before {
+      content: '✓'; color: var(--sage-deep); font-weight: 600; font-family: var(--font-sans);
+    }
+    .pricing-card .btn { width: 100%; justify-content: center; }
+    .platforms { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+    .platform {
+      padding: 5px 14px; border-radius: 999px; background: var(--paper-50);
+      border: 1px solid var(--paper-200);
+      font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-600); letter-spacing: 0.12em;
+    }
+
+    /* Closing */
+    .closing {
+      background: var(--ink-900); color: var(--paper-0);
+      padding: 140px 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .closing::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 30%, rgba(232,181,100,0.1) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(156,184,156,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .closing h2 {
+      font-family: var(--font-serif); font-size: clamp(40px, 5.5vw, 64px); font-weight: 400;
+      line-height: 1.12; letter-spacing: -0.02em; color: var(--paper-0); margin: 0 auto; max-width: 900px;
+    }
+    .closing h2 em { font-style: italic; color: #e8c98c; }
+    .closing p { font-family: var(--font-serif); font-style: italic; color: #c8baa4; font-size: 17px; margin-top: 28px; }
+    .closing .btn.primary { background: var(--paper-0); color: var(--ink-900); margin-top: 40px; }
+    .closing .sig {
+      display: inline-block; font-family: var(--font-mono); color: #988a70; font-size: 11px; letter-spacing: 0.28em; margin-top: 70px;
     }
 
     /* Footer */
-    footer { padding: 60px 0 40px; border-top: 1px solid var(--border); }
-    .footer-content { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
-    .footer-brand h3 { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-    .footer-brand p { font-size: 14px; color: var(--text-secondary); max-width: 280px; }
-    .footer-links h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
-    .footer-links a { display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text); }
-    .footer-bottom { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+    footer.site {
+      background: var(--paper-50); border-top: 1px solid var(--paper-200);
+      padding: 60px 0 32px;
+    }
+    footer.site .f-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px;
+    }
+    footer.site .f-brand p { color: var(--ink-600); font-family: var(--font-serif); font-style: italic; font-size: 14px; margin-top: 10px; max-width: 280px; }
+    footer.site h5 { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.22em; color: var(--ink-500); text-transform: uppercase; margin: 0 0 14px; }
+    footer.site .f-links a { display: block; font-family: var(--font-serif); font-size: 14px; color: var(--ink-700); margin-bottom: 7px; }
+    footer.site .f-links a:hover { color: var(--ink-900); }
+    footer.site .f-bottom {
+      border-top: 1px solid var(--paper-200); padding-top: 22px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-mono); font-size: 11px; color: var(--ink-500); letter-spacing: 0.1em;
+    }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .showcase-item, .showcase-item.reverse { grid-template-columns: 1fr; gap: 32px; direction: ltr; }
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .showcase-item, .showcase-item.reverse { grid-template-columns: 1fr; gap: 40px; }
+      .showcase-item.reverse > :first-child { order: 0; }
       .security-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 32px; }
-      .footer-content { flex-direction: column; }
-      .nav-links a.hide-mobile { display: none; }
+      .provider-grid { grid-template-columns: repeat(2, 1fr); }
+      footer.site .f-grid { grid-template-columns: 1fr 1fr; }
+      nav .links { display: none; }
+      .mock-body { height: 440px; }
+      .mock-side { display: none; }
     }
-    @media (max-width: 480px) { .hero-buttons { flex-direction: column; align-items: center; } }
-
-    /* Animations */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 560px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .provider-grid { grid-template-columns: 1fr 1fr; }
+      section { padding: 80px 0; }
+    }
   </style>
 </head>
-<body data-lang="en">
+<body data-lang="zh">
 
-<nav>
+<!-- Nav -->
+<nav class="top">
   <div class="container">
-    <div class="nav-logo">Murmur <span>喃喃</span></div>
-    <div class="nav-links">
-      <a href="#features" class="hide-mobile"><span class="lang-text-en">Features</span><span class="lang-text-zh">功能</span></a>
-      <a href="#security" class="hide-mobile"><span class="lang-text-en">Security</span><span class="lang-text-zh">安全</span></a>
-      <a href="#pricing"><span class="lang-text-en">Pricing</span><span class="lang-text-zh">价格</span></a>
-      <button class="lang-btn" onclick="toggleLang()">中文</button>
+    <a href="#" class="brand">
+      <div class="brand-seal">喃</div>
+      <div class="brand-name">喃喃<em>Murmur</em></div>
+    </a>
+    <div class="spacer"></div>
+    <div class="links">
+      <a href="#features"><span class="zh">功能</span><span class="en">Features</span></a>
+      <a href="#security"><span class="zh">隐私</span><span class="en">Privacy</span></a>
+      <a href="#ai"><span class="zh">AI</span><span class="en">AI</span></a>
+      <a href="#pricing"><span class="zh">定价</span><span class="en">Pricing</span></a>
     </div>
+    <button class="lang-btn" onclick="toggleLang()">
+      <span class="zh">EN</span><span class="en">中文</span>
+    </button>
+    <a href="https://lolieatapple.gumroad.com/l/murmur" class="btn primary" style="padding: 7px 16px; font-size: 12.5px;" target="_blank" rel="noopener">
+      <span class="zh">下载</span><span class="en">Download</span>
+    </a>
   </div>
 </nav>
 
 <!-- Hero -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-badge">
-      <span class="lang-text-en">Private &amp; Encrypted</span>
-      <span class="lang-text-zh">隐私加密</span>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="container hero-wrap">
+    <div class="hero-copy">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span class="zh">加密 · 本地 · 开源</span>
+        <span class="en">Encrypted · Local · Open Source</span>
+      </div>
+      <h1 class="display">
+        <span class="zh-block">给自己<br/><em>写一封</em><br/>今天的信。</span>
+        <span class="en-block">Write yourself<br/><em>a letter</em><br/>about today.</span>
+      </h1>
+      <p class="lede" style="margin-top: 36px;">
+        <span class="zh">喃喃是一款温柔的加密聊天日记。像和朋友发消息一样记录生活，让 AI 做你安静的倾听者。一切都只存在你的设备里。</span>
+        <span class="en">Murmur is a warm, encrypted chat-style diary. Write like you're texting a friend, let AI be a quiet listener. Everything stays on your device.</span>
+      </p>
+      <div class="hero-actions">
+        <a href="https://lolieatapple.gumroad.com/l/murmur" class="btn primary" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
+          <span class="zh">下载 · $9.90 永久拥有</span>
+          <span class="en">Download · $9.90 forever</span>
+        </a>
+        <a href="#features" class="btn outline">
+          <span class="zh">了解更多</span>
+          <span class="en">Learn more</span>
+        </a>
+      </div>
+      <p class="price-note">
+        <span class="zh">一次付费 · <strong>macOS · Windows · Linux</strong> · 无订阅</span>
+        <span class="en">One-time purchase · <strong>macOS · Windows · Linux</strong> · no subscriptions</span>
+      </p>
     </div>
-    <h1>
-      <span class="lang-text-en">Write like you're texting yourself</span>
-      <span class="lang-text-zh">像发消息一样写日记</span>
-    </h1>
-    <p class="subtitle">
-      <span class="lang-text-en">Murmur is a beautiful, encrypted chat-style diary. Capture your thoughts in message bubbles, let AI be your warm companion, and keep everything private on your device.</span>
-      <span class="lang-text-zh">喃喃是一款精美的加密聊天式日记。用消息气泡记录想法，让 AI 成为温暖的伙伴，一切都私密地保存在你的设备上。</span>
-    </p>
-    <div class="hero-buttons">
-      <a href="https://lolieatapple.gumroad.com/l/murmur" class="btn-primary" target="_blank" rel="noopener">
-        <span class="lang-text-en">Download Now &mdash; $9.90</span>
-        <span class="lang-text-zh">立即下载 &mdash; $9.90</span>
-      </a>
-      <a href="#features" class="btn-secondary">
-        <span class="lang-text-en">Learn More</span>
-        <span class="lang-text-zh">了解更多</span>
-      </a>
+
+    <!-- Interactive mock (simulates the real app) -->
+    <div class="hero-mock-wrap">
+      <div class="hero-mock">
+        <div class="mock-chrome">
+          <div class="mock-dot" style="background:#ff5f57"></div>
+          <div class="mock-dot" style="background:#febc2e"></div>
+          <div class="mock-dot" style="background:#28c840"></div>
+          <div class="title"><span class="zh">喃喃 · 四月十七日</span><span class="en">Murmur · April 17</span></div>
+          <div style="width: 52px"></div>
+        </div>
+        <div class="mock-body">
+          <!-- Nav rail -->
+          <div class="mock-rail">
+            <div class="mock-rail-item active">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            </div>
+            <div class="mock-rail-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 17l-5-5-4 5-2-2-7 5"/></svg>
+            </div>
+            <div class="mock-rail-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2z"/><path d="M7 8h9M7 12h9"/></svg>
+            </div>
+            <div class="mock-rail-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.5 6 6.5.6-5 4.4 1.6 6.4L12 17l-5.6 3.4 1.6-6.4-5-4.4 6.5-.6z"/></svg>
+            </div>
+            <div class="mock-rail-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="14" r="5"/><path d="M8 3l4 7 4-7"/></svg>
+            </div>
+          </div>
+          <!-- Sidebar -->
+          <div class="mock-side">
+            <div class="mock-side-title"><span class="zh">四月</span><span class="en">April</span></div>
+            <div class="mock-side-sub">2026 · 47<span class="zh">天</span><span class="en"> DAYS</span></div>
+            <div class="mock-day"><span><span class="zh">周五</span><span class="en">Fri</span> · <span class="zh">春雨</span><span class="en">Light rain</span></span><span class="num">04·15</span></div>
+            <div class="mock-day"><span><span class="zh">周四</span><span class="en">Thu</span> · <span class="zh">多云</span><span class="en">Cloudy</span></span><span class="num">04·16</span></div>
+            <div class="mock-day active"><span><span class="zh">今天</span><span class="en">Today</span> · <span class="zh">晴</span><span class="en">Sunny</span></span><span class="num">04·17</span></div>
+          </div>
+          <!-- Main chat -->
+          <div class="mock-main">
+            <div class="mock-date"><span class="zh">四月十七日 · 周五 · 晴</span><span class="en">April 17 · Friday · Sunny</span></div>
+            <div class="mock-bubble-row user">
+              <div>
+                <div class="mock-bubble user"><span class="zh">今天路过花店，闻到满街的栀子花味。</span><span class="en">Passed the florist today — the whole street smelled of gardenia.</span></div>
+                <div class="mock-time">08:42</div>
+              </div>
+            </div>
+            <div class="mock-bubble-row">
+              <div class="mock-bubble ai"><span class="zh">写下来吧，这样的香气很容易被忘记。要我帮你记一笔吗？</span><span class="en">Write it down — scents like that fade so easily. Want me to jot a note?</span></div>
+            </div>
+            <div class="mock-bubble-row user">
+              <div>
+                <div class="mock-bubble user"><span class="zh">还有咖啡店的白猫睡在窗台上，被太阳晒成一团毛糕。</span><span class="en">And the café's white cat asleep on the sill, melted into sunlight.</span></div>
+                <div class="mock-time">08:45</div>
+              </div>
+            </div>
+            <div class="mock-bubble-row">
+              <div class="mock-bubble ai"><span class="zh">听起来真幸福。我帮你标上 "小美好" 标签了 🌿</span><span class="en">That sounds lovely. I've tagged it "small joys" 🌿</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="price-tag">
-      <span class="lang-text-en">One-time purchase of <strong>$9.90</strong>. Own it forever.</span>
-      <span class="lang-text-zh">一次购买 <strong>$9.90</strong>，永久拥有。</span>
-    </p>
-    <div class="hero-screenshot">
-      <img class="lang-img-en" src="images/chat-english.png" alt="Murmur chat interface">
-      <img class="lang-img-zh" src="images/chat-chinese.png" alt="喃喃聊天界面">
+
+    <!-- Stats -->
+    <div class="stat-row" style="justify-content: center; margin-top: 60px;">
+      <div class="stat"><div class="n">AES-256</div><div class="l"><span class="zh">逐字段加密</span><span class="en">Field-level</span></div></div>
+      <div class="stat"><div class="n">7</div><div class="l"><span class="zh">AI 服务商</span><span class="en">AI providers</span></div></div>
+      <div class="stat"><div class="n">0</div><div class="l"><span class="zh">服务器</span><span class="en">Servers</span></div></div>
+      <div class="stat"><div class="n">AGPL-3.0</div><div class="l"><span class="zh">开源协议</span><span class="en">License</span></div></div>
     </div>
   </div>
 </section>
 
 <!-- Features -->
-<section class="features" id="features">
+<section id="features">
   <div class="container">
-    <div class="section-title fade-up">
-      <h2>
-        <span class="lang-text-en">Everything you need to journal</span>
-        <span class="lang-text-zh">写日记所需的一切</span>
+    <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+      <div class="eyebrow">01 · <span class="zh">功能</span><span class="en">Features</span></div>
+      <h2 class="section">
+        <span class="zh-block">写日记需要的<br/><em>一切温柔。</em></span>
+        <span class="en-block">Everything you need<br/><em>to journal gently.</em></span>
       </h2>
-      <p>
-        <span class="lang-text-en">A diary that feels like texting, with powerful features beneath the simplicity.</span>
-        <span class="lang-text-zh">看起来像聊天，内在功能强大。</span>
+      <p class="lede" style="margin: 18px auto 0;">
+        <span class="zh">看起来像聊天，内里功能齐全。</span>
+        <span class="en">Looks like texting. Packed with everything a journal needs.</span>
       </p>
     </div>
+
     <div class="features-grid">
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#d4e8c2;">💬</div>
-        <h3><span class="lang-text-en">Chat-Style Writing</span><span class="lang-text-zh">聊天式写作</span></h3>
-        <p><span class="lang-text-en">Write diary entries as chat bubbles. Quick, natural, and low-pressure — just like texting a friend. Send text, images, mood cards, and more.</span><span class="lang-text-zh">用聊天气泡写日记，快速、自然、无压力。支持文字、图片、心情卡片、引用回复，就像给朋友发消息。</span></p>
+      <div class="feature">
+        <div class="num">F · 01</div>
+        <div class="glyph" style="background:#f7e8d0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a36b3a" stroke-width="1.6" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg>
+        </div>
+        <h3><span class="zh">聊天式写作</span><span class="en">Chat-style writing</span></h3>
+        <p><span class="zh">像给朋友发消息一样记录。文字、图片、心情卡片，一条一条，不再有空白页的压力。</span><span class="en">Capture thoughts as message bubbles. Text, photos, mood cards — no more blank-page anxiety.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#e8dff5;">🤖</div>
-        <h3><span class="lang-text-en">AI Companion</span><span class="lang-text-zh">AI 伙伴</span></h3>
-        <p><span class="lang-text-en">Tap the AI button and get a warm, thoughtful response to your day. Like talking to a friend who truly listens. Supports OpenAI, Claude, Gemini, DeepSeek, MiniMax, and Ollama.</span><span class="lang-text-zh">点击 AI 按钮，获得对你一天的温暖回应。就像和一位真正倾听你的朋友聊天。支持 OpenAI、Claude、Gemini、DeepSeek、MiniMax 和 Ollama。</span></p>
+      <div class="feature">
+        <div class="num">F · 02</div>
+        <div class="glyph" style="background:#e0e8d4;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6a8a5a" stroke-width="1.6" stroke-linecap="round"><path d="M12 3v6M12 15v6M3 12h6M15 12h6M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/></svg>
+        </div>
+        <h3><span class="zh">AI 伙伴</span><span class="en">AI companion</span></h3>
+        <p><span class="zh">点一下，让 AI 温柔地回应你的一天 —— 不说教，像一位真正在听你说话的朋友。</span><span class="en">Tap once and let AI reply with warmth, not summaries. Like a friend who actually listens.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#f5e6d0;">🔒</div>
-        <h3><span class="lang-text-en">Military-Grade Encryption</span><span class="lang-text-zh">军事级加密</span></h3>
-        <p><span class="lang-text-en">AES-256-GCM field-level encryption with Argon2 key derivation. Your diary stays on your device, always encrypted. No cloud, no servers, no accounts.</span><span class="lang-text-zh">AES-256-GCM 逐字段加密，配合 Argon2 密钥派生。日记始终加密存储在你的设备上。没有云端，没有服务器，不需要注册。</span></p>
+      <div class="feature">
+        <div class="num">F · 03</div>
+        <div class="glyph" style="background:#f0dcd0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a36b6b" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        </div>
+        <h3><span class="zh">军事级加密</span><span class="en">Military-grade encryption</span></h3>
+        <p><span class="zh">AES-256-GCM 逐字段加密 + Argon2 密钥派生。没有云端、没有账号，只有你和你的设备。</span><span class="en">AES-256-GCM field-level encryption + Argon2. No cloud, no accounts — just you and your device.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#fce4ec;">🎭</div>
-        <h3><span class="lang-text-en">Decoy Space</span><span class="lang-text-zh">伪装空间</span></h3>
-        <p><span class="lang-text-en">Enter the wrong password and a separate, innocent-looking diary opens. No one can prove your real diary exists. Plausible deniability, built in.</span><span class="lang-text-zh">输入错误密码，会打开一个独立的、看起来无害的日记。没人能证明你的真实日记存在。合理否认性，与生俱来。</span></p>
+      <div class="feature">
+        <div class="num">F · 04</div>
+        <div class="glyph" style="background:#f0d8e0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a47090" stroke-width="1.6" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3><span class="zh">伪装空间</span><span class="en">Decoy space</span></h3>
+        <p><span class="zh">错误密码打开无害的日记，正确密码进入真实记录。合理否认，与生俱来。</span><span class="en">A wrong password opens a harmless diary. The right one unlocks your real life. Plausible deniability, built in.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#d0e8f5;">📝</div>
-        <h3><span class="lang-text-en">Long-Form Articles</span><span class="lang-text-zh">长文写作</span></h3>
-        <p><span class="lang-text-en">Switch to a rich WYSIWYG Markdown editor for longer entries. Bold, headings, code blocks, images — all supported. Articles appear as cards in your chat flow.</span><span class="lang-text-zh">切换到所见即所得 Markdown 编辑器写长篇内容。支持加粗、标题、代码块、图片。文章以卡片形式嵌入聊天流。</span></p>
+      <div class="feature">
+        <div class="num">F · 05</div>
+        <div class="glyph" style="background:#d8e4f0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5c7a9a" stroke-width="1.6" stroke-linecap="round"><path d="M4 20h16M4 17l10-10 3 3-10 10H4zM12 9l3 3"/></svg>
+        </div>
+        <h3><span class="zh">长文写作</span><span class="en">Long-form articles</span></h3>
+        <p><span class="zh">切换到所见即所得 Markdown 编辑器写长篇。文章以精致卡片嵌入聊天流。</span><span class="en">Switch to a WYSIWYG Markdown editor for longer pieces. Articles slide into the chat as elegant cards.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#f5d0d0;">😊</div>
-        <h3><span class="lang-text-en">Mood Tracking</span><span class="lang-text-zh">心情记录</span></h3>
-        <p><span class="lang-text-en">Record your mood with 10 beautiful emotion cards. Multiple moods per day — morning happy, evening tired. Track your emotional journey over time.</span><span class="lang-text-zh">用 10 种精美的情绪卡片记录心情。每天可记录多次 —— 早上开心，晚上疲惫。追踪你的情感旅程。</span></p>
+      <div class="feature">
+        <div class="num">F · 06</div>
+        <div class="glyph" style="background:#f5e4d0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b88a5a" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 14c.8 1.2 2.2 2 4 2s3.2-.8 4-2M9 9.5v.5M15 9.5v.5"/></svg>
+        </div>
+        <h3><span class="zh">心情记录</span><span class="en">Mood tracking</span></h3>
+        <p><span class="zh">10 种莫兰迪色情绪卡片，一天可以标多次。早上开心，夜里疲惫，都值得记下来。</span><span class="en">10 morandi-hued emotion cards, multiple per day. Happy in the morning, tired at night — all worth noting.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#d4f5d0;">🏷️</div>
-        <h3><span class="lang-text-en">Tags & Full-Text Search</span><span class="lang-text-zh">标签与全文搜索</span></h3>
-        <p><span class="lang-text-en">Organize entries with custom color-coded tags (Morandy palette). Full-text search across messages, articles, AI replies, and tags.</span><span class="lang-text-zh">用自定义莫兰迪色系标签整理日记。全文搜索覆盖消息、文章、AI 回复和标签。</span></p>
+      <div class="feature">
+        <div class="num">F · 07</div>
+        <div class="glyph" style="background:#d4f0e0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5a9a7a" stroke-width="1.6" stroke-linecap="round"><path d="M20 12l-8 8L3 11V4h7z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor"/></svg>
+        </div>
+        <h3><span class="zh">标签与全文搜索</span><span class="en">Tags & full-text search</span></h3>
+        <p><span class="zh">自定义莫兰迪色标签。消息、文章、AI 回复统统可搜 —— 找回某一天的思绪只要几秒。</span><span class="en">Color-coded tags in a morandi palette. Search spans messages, articles, AI replies — find any moment in seconds.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#d0f5f0;">📱</div>
-        <h3><span class="lang-text-en">Telegram & WeChat Sync</span><span class="lang-text-zh">Telegram & 微信同步</span></h3>
-        <p><span class="lang-text-en">Connect Telegram bot or scan QR to link WeChat — send diary entries on the go. Text, photos, and voice messages are saved automatically with a source badge.</span><span class="lang-text-zh">连接 Telegram Bot 或扫码绑定微信，随时随地发送日记。文字、图片、语音消息自动保存，并标注来源。</span></p>
+      <div class="feature">
+        <div class="num">F · 08</div>
+        <div class="glyph" style="background:#d0e8f0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a8aa8" stroke-width="1.6" stroke-linecap="round"><path d="M3 12l18-7-3 16-6-4-3 4v-5l9-7"/></svg>
+        </div>
+        <h3><span class="zh">Telegram & 微信同步</span><span class="en">Telegram & WeChat sync</span></h3>
+        <p><span class="zh">连接 Bot 或扫码绑定微信，随时随地发一条 —— 文字、图片、语音自动落到当天。</span><span class="en">Connect a Telegram bot or scan WeChat to send entries on the go. Text, images, voice — all filed to today.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#e8e0d4;">⚡</div>
-        <h3><span class="lang-text-en">Quick Capture</span><span class="lang-text-zh">快速记录</span></h3>
-        <p><span class="lang-text-en">Global hotkey (Cmd+Shift+M) summons a Spotlight-style floating input. Type a thought, hit enter, done. Never lose a fleeting idea.</span><span class="lang-text-zh">全局快捷键 (Cmd+Shift+M) 唤出 Spotlight 风格的浮动输入框。输入想法，回车，完成。灵感不再溜走。</span></p>
+      <div class="feature">
+        <div class="num">F · 09</div>
+        <div class="glyph" style="background:#e8e0d4;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7a6a4a" stroke-width="1.6" stroke-linecap="round"><path d="M20 4c-4 0-8 2-10 6s-3 8 0 10 6-1 8-3l-5 5M14 10l-6 6"/></svg>
+        </div>
+        <h3><span class="zh">快速记录</span><span class="en">Quick capture</span></h3>
+        <p><span class="zh">全局快捷键 ⌘⇧M 唤出 Spotlight 式输入框。输入、回车、完成。灵感不再溜走。</span><span class="en">Global ⌘⇧M summons a Spotlight-style input. Type, enter, done. Never lose a fleeting thought.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#f5f0d0;">🏆</div>
-        <h3><span class="lang-text-en">Achievements & Growth Tree</span><span class="lang-text-zh">成就系统与成长之树</span></h3>
-        <p><span class="lang-text-en">Unlock 15 badges as you build your habit — from "First Entry" to "Night Owl" (3 AM writing). Watch your growth tree evolve from seedling to forest.</span><span class="lang-text-zh">坚持写日记解锁 15 枚徽章 —— 从"初次提笔"到"夜猫子"（凌晨3点写日记）。看你的成长之树从幼苗长成森林。</span></p>
+      <div class="feature">
+        <div class="num">F · 10</div>
+        <div class="glyph" style="background:#e8dcd0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8c6a4a" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="14" r="5"/><path d="M8 3l4 7 4-7M9 19l-1 3 4-2 4 2-1-3"/></svg>
+        </div>
+        <h3><span class="zh">成就与成长树</span><span class="en">Badges & growth tree</span></h3>
+        <p><span class="zh">15 枚徽章等你解锁，从"初次提笔"到"夜猫子"。你的小树也会慢慢从幼苗长成森林。</span><span class="en">15 badges from "First Entry" to "Night Owl" (3 AM). Watch your tree grow from seedling to forest.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#e0d4f5;">🎲</div>
-        <h3><span class="lang-text-en">Random Memory</span><span class="lang-text-zh">随机回忆</span></h3>
-        <p><span class="lang-text-en">Roll the dice to resurface a random diary from the past. Like flipping through an old journal — full of surprises.</span><span class="lang-text-zh">掷骰子随机重温过去某天的日记。像翻旧日记本一样，充满惊喜。</span></p>
+      <div class="feature">
+        <div class="num">F · 11</div>
+        <div class="glyph" style="background:#ded0e8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7a6a9a" stroke-width="1.6" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="15" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/><circle cx="9" cy="15" r="1" fill="currentColor"/></svg>
+        </div>
+        <h3><span class="zh">随机回忆</span><span class="en">Random memory</span></h3>
+        <p><span class="zh">掷一次骰子，翻到过去随机一天。像不经意翻开旧日记 —— 每次都有惊喜。</span><span class="en">Roll the dice. Land on a random day from the past. Like flipping through an old journal — always a surprise.</span></p>
       </div>
-      <div class="feature-card fade-up">
-        <div class="feature-icon" style="background:#f5e0d4;">🌸</div>
-        <h3><span class="lang-text-en">Seasonal Atmosphere</span><span class="lang-text-zh">四季氛围</span></h3>
-        <p><span class="lang-text-en">Subtle ambient backgrounds shift with time of day. Delicate seasonal particles — cherry blossoms in spring, snowflakes in winter — float through your diary.</span><span class="lang-text-zh">背景随时间段微妙变化。轻柔的季节粒子效果 —— 春天樱花、冬天雪花 —— 飘过你的日记。</span></p>
+      <div class="feature">
+        <div class="num">F · 12</div>
+        <div class="glyph" style="background:#f5dcd8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b88080" stroke-width="1.6" stroke-linecap="round"><path d="M12 2a5 5 0 0 1 5 5c0 3-5 8-5 8s-5-5-5-8a5 5 0 0 1 5-5zM7 14c-3 2-5 5-5 8M17 14c3 2 5 5 5 8"/></svg>
+        </div>
+        <h3><span class="zh">四季氛围</span><span class="en">Seasonal atmosphere</span></h3>
+        <p><span class="zh">背景随时间段悄悄变化，细腻的季节粒子飘过 —— 春樱、夏波、秋叶、冬雪。</span><span class="en">Backgrounds shift with the hour. Delicate particles drift by — cherry blossoms, waves, leaves, snow.</span></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Showcase: AI -->
-<section class="showcase">
+<!-- Showcase -->
+<section>
   <div class="container">
-    <div class="showcase-item fade-up">
-      <div class="showcase-text">
+    <div class="showcase-item">
+      <div>
+        <div class="eyebrow">02 · <span class="zh">真正的倾听</span><span class="en">Truly listening</span></div>
         <h3>
-          <span class="lang-text-en">An AI That Truly Listens</span>
-          <span class="lang-text-zh">一个真正倾听你的 AI</span>
+          <span class="zh-block">一个<em>愿意听</em>你讲<br/>废话的朋友。</span>
+          <span class="en-block">A friend who<br/><em>actually listens.</em></span>
         </h3>
         <p>
-          <span class="lang-text-en">After writing your day, tap the AI button to get a thoughtful, warm response. It reads everything you wrote — text, moods, images — and replies like a supportive friend, not a robot.</span>
-          <span class="lang-text-zh">写完一天的内容后，点击 AI 按钮获得体贴温暖的回应。它读懂你写的一切 —— 文字、心情、图片 —— 像一个体贴的朋友而非机器人那样回复你。</span>
+          <span class="zh">写完一天，点 AI 按钮。它会读完你今天的全部 —— 文字、心情、图片，然后像一个懂你的朋友一样温柔回应。</span>
+          <span class="en">When your day is done, tap AI. It reads everything you wrote — text, moods, images — then replies like someone who gets you.</span>
         </p>
         <p>
-          <span class="lang-text-en">Choose from 7 AI providers — OpenAI, Claude, Gemini, DeepSeek, MiniMax, or run 100% offline with Ollama. Customize the AI's personality in settings.</span>
-          <span class="lang-text-zh">7 种 AI 服务商可选 —— OpenAI、Claude、Gemini、DeepSeek、MiniMax，或用 Ollama 完全离线运行。在设置中自定义 AI 的性格。</span>
+          <span class="zh">7 种服务商自由选。偏爱隐私？用 Ollama 完全离线。AI 的性格也可以在设置里亲自定义。</span>
+          <span class="en">7 providers to choose from. Want total privacy? Run Ollama offline. You can even write the AI's personality yourself.</span>
         </p>
+        <div class="chip-row">
+          <div class="chip"><span class="dot"></span>OpenAI</div>
+          <div class="chip"><span class="dot"></span>Claude</div>
+          <div class="chip"><span class="dot"></span>Gemini</div>
+          <div class="chip"><span class="dot"></span>DeepSeek</div>
+          <div class="chip"><span class="dot"></span>MiniMax</div>
+          <div class="chip"><span class="dot" style="background: var(--clay);"></span>Ollama · Local</div>
+        </div>
       </div>
-      <div class="showcase-img">
-        <img class="lang-img-en" src="images/chat-english.png" alt="AI reply in English">
-        <img class="lang-img-zh" src="images/chat-chinese.png" alt="AI 中文回复">
+      <div>
+        <div style="background: var(--paper-0); border-radius: 14px; padding: 24px; border: 1px solid var(--paper-200); box-shadow: 0 20px 50px rgba(90,60,30,0.1);">
+          <div style="text-align:center; font-family:var(--font-serif); font-style:italic; color:var(--ink-600); font-size:12.5px; padding-bottom:12px; border-bottom:1px dashed var(--paper-300); margin-bottom:16px;">
+            <span class="zh">今天 · AI 回应</span><span class="en">Today · AI reply</span>
+          </div>
+          <div class="mock-bubble-row user" style="padding:0 0 10px;">
+            <div>
+              <div class="mock-bubble user"><span class="zh">读完了《夜航船》。</span><span class="en">Just finished Zhang Dai's Night Boat.</span></div>
+              <div class="mock-time">21:02</div>
+            </div>
+          </div>
+          <div class="mock-bubble-row" style="padding:0 0 10px;">
+            <div class="mock-bubble ai"><span class="zh">好浪漫的一本书。你读完印象最深的一句是什么？</span><span class="en">Such a romantic book. What line stayed with you most?</span></div>
+          </div>
+          <div class="mock-bubble-row user" style="padding:0 0 10px;">
+            <div>
+              <div class="mock-bubble user"><span class="zh">"且待小僧伸伸脚。" 笑了半天。</span><span class="en">"Wait — let the monk stretch his legs." Laughed for ages.</span></div>
+              <div class="mock-time">21:04</div>
+            </div>
+          </div>
+          <div class="mock-bubble-row">
+            <div class="mock-bubble ai"><span class="zh">我也很喜欢。帮你标上 "读书笑点" 了。</span><span class="en">I love that one too. Tagged it "reading laughs."</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Showcase: Decoy Space -->
-    <div class="showcase-item reverse fade-up">
-      <div class="showcase-text">
+    <div class="showcase-item reverse">
+      <div>
+        <div class="eyebrow">03 · <span class="zh">合理否认性</span><span class="en">Plausible deniability</span></div>
         <h3>
-          <span class="lang-text-en">Decoy Space: Your Secret Shield</span>
-          <span class="lang-text-zh">伪装空间：你的秘密护盾</span>
+          <span class="zh-block">两把锁，<em>一个</em><br/>秘密的保险库。</span>
+          <span class="en-block">Two keys, one<br/><em>private vault.</em></span>
         </h3>
         <p>
-          <span class="lang-text-en">Enter the wrong password and Murmur opens a completely separate public diary — with its own entries. No one can tell your real diary exists. Even under pressure, your secrets stay safe.</span>
-          <span class="lang-text-zh">输入错误密码，喃喃会打开一个完全独立的公开日记 —— 有自己的内容。没人能发现你的真实日记存在。即使在压力下，你的秘密也安全无虞。</span>
+          <span class="zh">输入错误密码，喃喃会打开一个完全独立、看起来无害的日记 —— 有自己的内容和气氛。真实的那个，没人能证明它存在。</span>
+          <span class="en">The wrong password opens a harmless, fully-populated diary of its own. Your real one stays invisible — provably so.</span>
         </p>
         <p>
-          <span class="lang-text-en">Your private space uses AES-256-GCM encryption with a master key protected by both your password and a recovery code — two independent locks on the same vault.</span>
-          <span class="lang-text-zh">你的私密空间使用 AES-256-GCM 加密，主密钥由密码和恢复码双重保护 —— 两把独立的锁守护同一个保险库。</span>
+          <span class="zh">私密空间用 AES-256-GCM 加密，主密钥由密码 + 恢复码双重保护。两把独立的锁，守护同一个保险库。</span>
+          <span class="en">The private space uses AES-256-GCM with a master key guarded by your password and a recovery code. Two independent keys on the same vault.</span>
         </p>
+        <div class="chip-row">
+          <div class="chip"><span class="dot" style="background: var(--clay);"></span><span class="zh">公开空间 · 无害</span><span class="en">Public · harmless</span></div>
+          <div class="chip"><span class="dot" style="background: var(--sage-deep);"></span><span class="zh">私密空间 · 加密</span><span class="en">Private · encrypted</span></div>
+        </div>
       </div>
-      <div class="showcase-img">
-        <img class="lang-img-en" src="images/cover-english.png" alt="Murmur login screen">
-        <img class="lang-img-zh" src="images/cover-chinese.png" alt="喃喃登录界面">
+      <div>
+        <div style="position:relative; width:100%; min-height:340px;">
+          <div style="position:absolute; top:30px; left:0; width:70%; background: var(--paper-50); border:1px solid var(--paper-300); border-radius:12px; padding:18px; transform: rotate(-2deg); box-shadow: 0 20px 40px rgba(0,0,0,0.08);">
+            <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.2em; color:var(--ink-500);"><span class="zh">公开空间 / DECOY</span><span class="en">DECOY SPACE</span></div>
+            <div style="font-family:var(--font-serif); font-size:16px; color:var(--ink-800); margin-top:6px;"><span class="zh">"今天去超市买菜。"</span><span class="en">"Went to the grocery store today."</span></div>
+            <div style="font-family:var(--font-serif); font-style:italic; font-size:12px; color:var(--ink-500); margin-top:10px;"><span class="zh">— 一个看起来再普通不过的日记。</span><span class="en">— An entirely ordinary diary.</span></div>
+          </div>
+          <div style="position:absolute; top:160px; right:0; width:75%; background: var(--paper-0); border:1.5px solid var(--ink-800); border-radius:12px; padding:18px; transform: rotate(1.5deg); box-shadow: 0 30px 60px rgba(90,60,30,0.18);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.2em; color:var(--clay);"><span class="zh">私密空间 / REAL</span><span class="en">PRIVATE SPACE</span></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--clay)" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            </div>
+            <div style="font-family:var(--font-serif); font-size:16px; color:var(--ink-900); margin-top:6px;"><span class="zh">"那天我没告诉任何人，但我其实哭了很久。"</span><span class="en">"I didn't tell anyone that day, but I cried for a long time."</span></div>
+            <div style="font-family:var(--font-serif); font-style:italic; font-size:12px; color:var(--ink-600); margin-top:10px;"><span class="zh">— AES-256-GCM · 本地加密 · 仅你可见</span><span class="en">— AES-256-GCM · locally encrypted · yours alone</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Security -->
-<section class="security" id="security">
+<section class="security-bg" id="security">
   <div class="container">
-    <div class="section-title fade-up">
-      <h2>
-        <span class="lang-text-en">Privacy by Design</span>
-        <span class="lang-text-zh">隐私至上的设计</span>
+    <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+      <div class="eyebrow">04 · <span class="zh">隐私设计</span><span class="en">Privacy by design</span></div>
+      <h2 class="section">
+        <span class="zh-block">日记应该是<br/><em>一件私事。</em></span>
+        <span class="en-block">A diary should be<br/><em>a private thing.</em></span>
       </h2>
-      <p>
-        <span class="lang-text-en">Your diary is the most private thing you own. Murmur is built to keep it that way.</span>
-        <span class="lang-text-zh">日记是你最私密的东西。喃喃从设计之初就以保护它为目标。</span>
+      <p class="lede" style="margin: 18px auto 0;">
+        <span class="zh">从第一行代码开始，喃喃就在守护这件事。</span>
+        <span class="en">Murmur was built from the first line of code to keep it that way.</span>
       </p>
     </div>
     <div class="security-grid">
-      <div class="security-card fade-up">
-        <div class="icon">🔐</div>
+      <div class="sec-card">
+        <div class="sec-seal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        </div>
         <div>
-          <h4><span class="lang-text-en">100% Local Storage</span><span class="lang-text-zh">100% 本地存储</span></h4>
-          <p><span class="lang-text-en">No cloud, no servers, no accounts. Your data lives on your machine and nowhere else. Export anytime as an encrypted backup.</span><span class="lang-text-zh">没有云端，没有服务器，不需要注册账号。数据只存在你的电脑上。随时导出加密备份。</span></p>
+          <h4><span class="zh">100% 本地存储</span><span class="en">100% local storage</span></h4>
+          <p><span class="zh">没有云端、没有服务器、不需要注册账号。数据只存在你的电脑上。随时导出加密备份。</span><span class="en">No cloud, no servers, no accounts. Data lives on your machine — and nowhere else. Export an encrypted backup any time.</span></p>
         </div>
       </div>
-      <div class="security-card fade-up">
-        <div class="icon">🛡️</div>
+      <div class="sec-card">
+        <div class="sec-seal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/></svg>
+        </div>
         <div>
-          <h4><span class="lang-text-en">AES-256-GCM + Argon2</span><span class="lang-text-zh">AES-256-GCM + Argon2</span></h4>
-          <p><span class="lang-text-en">Every entry is encrypted at the field level. Images are encrypted on disk with hashed filenames. Even thumbnails are stored in the encrypted database.</span><span class="lang-text-zh">每条日记逐字段加密。图片在磁盘上加密存储，文件名使用哈希。连缩略图也存储在加密数据库中。</span></p>
+          <h4><span class="zh">AES-256-GCM + Argon2</span><span class="en">AES-256-GCM + Argon2</span></h4>
+          <p><span class="zh">每条日记逐字段加密。图片在磁盘上加密，文件名哈希。连缩略图都在加密数据库里。</span><span class="en">Every entry encrypted at the field level. Images encrypted on disk with hashed filenames. Even thumbnails live inside the encrypted DB.</span></p>
         </div>
       </div>
-      <div class="security-card fade-up">
-        <div class="icon">🎭</div>
+      <div class="sec-card">
+        <div class="sec-seal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
         <div>
-          <h4><span class="lang-text-en">Plausible Deniability</span><span class="lang-text-zh">合理否认性</span></h4>
-          <p><span class="lang-text-en">Wrong password opens a decoy diary. Right password opens your real one. Two separate spaces, completely isolated. No one can prove the private space exists.</span><span class="lang-text-zh">错误密码打开伪装日记，正确密码打开真实日记。两个完全隔离的空间。没人能证明私密空间的存在。</span></p>
+          <h4><span class="zh">合理否认性</span><span class="en">Plausible deniability</span></h4>
+          <p><span class="zh">错密码打开伪装日记，对密码进入真实空间。两个完全隔离的世界。</span><span class="en">Wrong password opens a decoy. Right password opens the real one. Two fully isolated worlds, no cross-talk.</span></p>
         </div>
       </div>
-      <div class="security-card fade-up">
-        <div class="icon">🔑</div>
+      <div class="sec-card">
+        <div class="sec-seal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 10a4 4 0 1 0-5.66 5.66L4 20v0L14 10zM18 14l2 2M16 16l4 4"/></svg>
+        </div>
         <div>
-          <h4><span class="lang-text-en">Recovery Code</span><span class="lang-text-zh">恢复码</span></h4>
-          <p><span class="lang-text-en">Forgot your password? Use the recovery code to regain access. No email, no phone, no third party. Password and recovery code are two independent locks on the same master key.</span><span class="lang-text-zh">忘记密码？用恢复码重新获取访问权限。无需邮箱、手机或任何第三方。密码和恢复码是同一主密钥上的两把独立的锁。</span></p>
+          <h4><span class="zh">恢复码</span><span class="en">Recovery code</span></h4>
+          <p><span class="zh">忘了密码？用恢复码取回。无需邮箱、手机、第三方。两把独立的锁，守护同一把主密钥。</span><span class="en">Forgot your password? Use the recovery code. No email, no phone, no third party. Two independent locks on one master key.</span></p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AI Providers -->
-<section class="ai-providers" id="ai-providers">
+<!-- AI providers -->
+<section id="ai">
   <div class="container">
-    <div class="section-title fade-up">
-      <h2>
-        <span class="lang-text-en">Bring Your Own AI</span>
-        <span class="lang-text-zh">自带你的 AI</span>
+    <div style="max-width: 640px; margin: 0 auto; text-align: center;">
+      <div class="eyebrow">05 · <span class="zh">Bring Your Own AI</span><span class="en">Bring your own AI</span></div>
+      <h2 class="section">
+        <span class="zh-block">你的 AI，<em>你做主。</em></span>
+        <span class="en-block">Your AI, <em>your rules.</em></span>
       </h2>
     </div>
-    <div class="ai-notice fade-up">
-      <span class="lang-text-en">To protect your privacy, Murmur <strong>never routes your data through our servers</strong>. All AI features require you to configure your own API provider and key. Your diary content is sent directly from your device to the AI provider you choose — we never see it.</span>
-      <span class="lang-text-zh">为了保护你的隐私，喃喃<strong>绝不会将你的数据经过我们的服务器</strong>。所有 AI 功能都需要你自行配置 API 服务商和密钥。你的日记内容直接从你的设备发送到你选择的 AI 服务商 —— 我们永远看不到。</span>
+    <div class="ai-notice" style="margin-top: 40px;">
+      <span class="zh">为了保护你的隐私，喃喃 <strong>绝不会</strong> 将数据经过我们的服务器。所有 AI 功能都需要你自行配置服务商和 API 密钥，日记内容直接从你的设备发往你选的 AI —— 我们看不到。</span>
+      <span class="en">To protect your privacy, Murmur <strong>never</strong> routes data through our servers. All AI features use your own provider and key — diary content goes directly from your device to the AI you chose. We never see it.</span>
     </div>
     <div class="provider-grid">
-      <div class="provider-card fade-up">
-        <div class="provider-icon"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/openai.svg" alt="OpenAI"></div>
-        <h4>OpenAI</h4>
-        <p>GPT-4o, GPT-4o-mini</p>
-      </div>
-      <div class="provider-card fade-up">
-        <div class="provider-icon"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/anthropic.svg" alt="Anthropic"></div>
-        <h4>Anthropic</h4>
-        <p>Claude Sonnet, Opus</p>
-      </div>
-      <div class="provider-card fade-up">
-        <div class="provider-icon"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/gemini.svg" alt="Google Gemini"></div>
-        <h4>Google Gemini</h4>
-        <p>Gemini 2.0 Flash</p>
-      </div>
-      <div class="provider-card fade-up">
-        <div class="provider-icon"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/deepseek.svg" alt="DeepSeek"></div>
-        <h4>DeepSeek</h4>
-        <p>DeepSeek Chat</p>
-      </div>
-      <div class="provider-card fade-up">
-        <div class="provider-icon"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/minimax.svg" alt="MiniMax"></div>
-        <h4>MiniMax</h4>
-        <p>MiniMax-M2.7</p>
-      </div>
-      <div class="provider-card fade-up">
-        <div class="provider-icon"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/ollama.svg" alt="Ollama"></div>
-        <h4>Ollama</h4>
-        <p><span class="lang-text-en">100% Local / Offline</span><span class="lang-text-zh">100% 本地离线</span></p>
-      </div>
-      <div class="provider-card fade-up">
-        <div class="provider-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53a7.5 7.5 0 0 0 .07-1 7.5 7.5 0 0 0-.07-.97l2.11-1.63a.5.5 0 0 0 .12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1a7.37 7.37 0 0 0-1.67-.97l-.38-2.65A.49.49 0 0 0 14 2h-4a.49.49 0 0 0-.49.42l-.38 2.65a7.37 7.37 0 0 0-1.67.97l-2.49-1a.5.5 0 0 0-.61.22l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.63a7.5 7.5 0 0 0-.07.97 7.5 7.5 0 0 0 .07 1l-2.11 1.63a.5.5 0 0 0-.12.64l2 3.46a.5.5 0 0 0 .61.22l2.49-1c.52.38 1.08.7 1.67.97l.38 2.65c.05.24.26.42.49.42h4c.24 0 .44-.18.49-.42l.38-2.65a7.37 7.37 0 0 0 1.67-.97l2.49 1a.5.5 0 0 0 .61-.22l2-3.46a.5.5 0 0 0-.12-.64z" fill="var(--accent)"/></svg></div>
-        <h4><span class="lang-text-en">Custom</span><span class="lang-text-zh">自定义</span></h4>
-        <p><span class="lang-text-en">Any OpenAI-compatible API</span><span class="lang-text-zh">任何 OpenAI 兼容 API</span></p>
-      </div>
+      <div class="provider"><div class="ic"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/openai.svg" alt="OpenAI"></div><h4>OpenAI</h4><p>GPT-4o · 4o-mini</p></div>
+      <div class="provider"><div class="ic"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/anthropic.svg" alt="Anthropic"></div><h4>Anthropic</h4><p>Claude · Sonnet · Opus</p></div>
+      <div class="provider"><div class="ic"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/gemini.svg" alt="Gemini"></div><h4>Gemini</h4><p>2.0 Flash</p></div>
+      <div class="provider"><div class="ic"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/deepseek.svg" alt="DeepSeek"></div><h4>DeepSeek</h4><p>Chat · Reasoner</p></div>
+      <div class="provider"><div class="ic"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/minimax.svg" alt="MiniMax"></div><h4>MiniMax</h4><p>M2.7</p></div>
+      <div class="provider"><div class="ic"><img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/ollama.svg" alt="Ollama"></div><h4>Ollama</h4><p><span class="zh">本地 · 离线</span><span class="en">Local · offline</span></p></div>
+      <div class="provider"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--ink-700)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><h4><span class="zh">自定义</span><span class="en">Custom</span></h4><p><span class="zh">OpenAI 兼容 API</span><span class="en">Any OpenAI-compatible</span></p></div>
+      <div class="provider" style="background: var(--paper-50);"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="var(--ink-500)" stroke-width="1.6"><path d="M12 3l2.5 6 6.5.6-5 4.4 1.6 6.4L12 17l-5.6 3.4 1.6-6.4-5-4.4 6.5-.6z"/></svg></div><h4><span class="zh">内置模型</span><span class="en">Built-in</span></h4><p><span class="zh">每日 10 次免费</span><span class="en">10 free / day</span></p></div>
     </div>
   </div>
 </section>
 
 <!-- Pricing -->
-<section class="pricing" id="pricing">
+<section class="pricing-bg" id="pricing">
   <div class="container">
-    <div class="section-title fade-up">
-      <h2>
-        <span class="lang-text-en">Simple, Honest Pricing</span>
-        <span class="lang-text-zh">简单透明的定价</span>
+    <div style="max-width: 640px; margin: 0 auto 40px; text-align: center;">
+      <div class="eyebrow">06 · <span class="zh">定价</span><span class="en">Pricing</span></div>
+      <h2 class="section">
+        <span class="zh-block">一次付费，<br/><em>永久拥有。</em></span>
+        <span class="en-block">Pay once,<br/><em>keep forever.</em></span>
       </h2>
-      <p>
-        <span class="lang-text-en">Pay once, own it forever. No subscriptions, no hidden fees.</span>
-        <span class="lang-text-zh">一次购买，永久拥有。没有订阅，没有隐藏费用。</span>
+      <p class="lede" style="margin: 18px auto 0;">
+        <span class="zh">没有订阅、没有隐藏费用、不按月扣钱。</span>
+        <span class="en">No subscriptions. No hidden fees. No monthly drip.</span>
       </p>
     </div>
-    <div class="pricing-card fade-up">
-      <div class="price">$9.90</div>
-      <div class="price-period">
-        <span class="lang-text-en">One-time purchase</span>
-        <span class="lang-text-zh">一次性购买</span>
+    <div class="pricing-card">
+      <div class="pricing-stamp"><span class="zh">· 永久许可 ·</span><span class="en">· LIFETIME ·</span></div>
+      <div class="price-big"><em>$</em>9.90</div>
+      <div class="price-per">
+        <span class="zh">一次性付费 · 终身更新</span>
+        <span class="en">one-time · lifetime updates</span>
       </div>
-      <ul>
-        <li><span class="lang-text-en">All features included</span><span class="lang-text-zh">包含全部功能</span></li>
-        <li><span class="lang-text-en">Lifetime updates</span><span class="lang-text-zh">终身免费更新</span></li>
-        <li><span class="lang-text-en">macOS, Windows &amp; Linux</span><span class="lang-text-zh">支持 macOS、Windows 和 Linux</span></li>
-        <li><span class="lang-text-en">Bring your own AI provider</span><span class="lang-text-zh">自由选择 AI 服务商</span></li>
-        <li><span class="lang-text-en">No account required</span><span class="lang-text-zh">无需注册账号</span></li>
-        <li><span class="lang-text-en">No data collection</span><span class="lang-text-zh">不收集任何数据</span></li>
+      <ul class="price-ul">
+        <li><span class="zh">全部功能</span><span class="en">All features included</span></li>
+        <li><span class="zh">macOS · Windows · Linux 三端</span><span class="en">macOS · Windows · Linux</span></li>
+        <li><span class="zh">自由选择 AI 服务商</span><span class="en">Bring your own AI provider</span></li>
+        <li><span class="zh">不收集任何数据</span><span class="en">No data collection, ever</span></li>
+        <li><span class="zh">无需注册账号</span><span class="en">No account required</span></li>
+        <li><span class="zh">开源代码，自由审查</span><span class="en">Open source — audit the code</span></li>
       </ul>
-      <a href="https://lolieatapple.gumroad.com/l/murmur" class="btn-primary" target="_blank" rel="noopener">
-        <span class="lang-text-en">Buy Now</span>
-        <span class="lang-text-zh">立即购买</span>
+      <a href="https://lolieatapple.gumroad.com/l/murmur" class="btn primary" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
+        <span class="zh">立即下载</span>
+        <span class="en">Download now</span>
       </a>
       <div class="platforms">
-        <span class="platform-badge">macOS</span>
-        <span class="platform-badge">Windows</span>
-        <span class="platform-badge">Linux</span>
+        <div class="platform">macOS</div>
+        <div class="platform">WINDOWS</div>
+        <div class="platform">LINUX</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Open Source -->
-<section class="features" id="open-source" style="padding: 80px 0;">
+<!-- Closing -->
+<section class="closing">
   <div class="container">
-    <div class="section-title fade-up">
-      <h2>
-        <span class="lang-text-en">Open Source</span>
-        <span class="lang-text-zh">开源</span>
-      </h2>
-      <p style="max-width: 560px;">
-        <span class="lang-text-en">Murmur is fully open source under the AGPL-3.0 license. You can inspect every line of code to verify that your data stays private. Contributions are welcome.</span>
-        <span class="lang-text-zh">喃喃已在 AGPL-3.0 许可证下完全开源。你可以审查每一行代码，验证数据确实只留在本地。欢迎参与贡献。</span>
-      </p>
+    <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em; color: #b8aa8e; margin-bottom: 36px;">
+      <span class="zh">— 致 · 每一天的自己 —</span>
+      <span class="en">— TO EVERY DAY OF YOU —</span>
     </div>
-    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-      <a href="https://github.com/nannan-app/chat-diary" class="btn-secondary" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        <span class="lang-text-en">View on GitHub</span>
-        <span class="lang-text-zh">在 GitHub 上查看</span>
-      </a>
-    </div>
+    <h2>
+      <span class="zh-block">值得记下来的，<br/><em>往往是最小的事。</em></span>
+      <span class="en-block">What's worth remembering<br/><em>is usually the smallest thing.</em></span>
+    </h2>
+    <p>
+      <span class="zh">雨声、一杯热茶、下楼取快递时看到的晚霞。</span>
+      <span class="en">Rain on the window. A warm cup. The sky on your way downstairs.</span>
+    </p>
+    <a href="https://lolieatapple.gumroad.com/l/murmur" class="btn primary" target="_blank" rel="noopener">
+      <span class="zh">开始记录 · $9.90</span>
+      <span class="en">Start journaling · $9.90</span>
+    </a>
+    <div class="sig">NANNAN.APP · MMXXVI</div>
   </div>
 </section>
 
 <!-- Footer -->
-<footer>
+<footer class="site">
   <div class="container">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <h3>Murmur 喃喃</h3>
+    <div class="f-grid">
+      <div class="f-brand">
+        <div class="brand">
+          <div class="brand-seal">喃</div>
+          <div class="brand-name">喃喃<em>Murmur</em></div>
+        </div>
         <p>
-          <span class="lang-text-en">A private diary that feels like texting yourself.</span>
-          <span class="lang-text-zh">一款像发消息一样写日记的私密日记本。</span>
+          <span class="zh">一款像发消息一样写日记的私密日记本。</span>
+          <span class="en">A private diary that feels like texting yourself.</span>
         </p>
       </div>
-      <div class="footer-links">
-        <h4><span class="lang-text-en">Contact</span><span class="lang-text-zh">联系方式</span></h4>
-        <a href="mailto:lolieatapple@gmail.com">lolieatapple@gmail.com</a>
-        <a href="https://x.com/lolieatapple" target="_blank" rel="noopener">@lolieatapple on X</a>
+      <div class="f-links">
+        <h5><span class="zh">产品</span><span class="en">Product</span></h5>
+        <a href="#features"><span class="zh">功能</span><span class="en">Features</span></a>
+        <a href="#security"><span class="zh">隐私</span><span class="en">Privacy</span></a>
+        <a href="#pricing"><span class="zh">定价</span><span class="en">Pricing</span></a>
+        <a href="https://lolieatapple.gumroad.com/l/murmur" target="_blank" rel="noopener"><span class="zh">下载</span><span class="en">Download</span></a>
       </div>
-      <div class="footer-links">
-        <h4><span class="lang-text-en">Resources</span><span class="lang-text-zh">资源</span></h4>
+      <div class="f-links">
+        <h5><span class="zh">资源</span><span class="en">Resources</span></h5>
         <a href="https://github.com/nannan-app/chat-diary" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://lolieatapple.gumroad.com/l/murmur" target="_blank" rel="noopener"><span class="lang-text-en">Download</span><span class="lang-text-zh">下载</span></a>
+        <a href="https://nannan.app">nannan.app</a>
+      </div>
+      <div class="f-links">
+        <h5><span class="zh">联系</span><span class="en">Contact</span></h5>
+        <a href="mailto:lolieatapple@gmail.com">lolieatapple@gmail.com</a>
+        <a href="https://x.com/lolieatapple" target="_blank" rel="noopener">@lolieatapple</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      &copy; 2026 Murmur. <span class="lang-text-en">All rights reserved.</span><span class="lang-text-zh">保留所有权利。</span>
+    <div class="f-bottom">
+      <div>© 2026 MURMUR · <span class="zh">保留所有权利</span><span class="en">ALL RIGHTS RESERVED</span></div>
+      <div>AGPL-3.0 · OPEN SOURCE</div>
     </div>
   </div>
 </footer>
@@ -657,31 +957,25 @@
 <script>
 function toggleLang() {
   const body = document.body;
-  const current = body.getAttribute("data-lang");
-  const next = current === "en" ? "zh" : "en";
-  body.setAttribute("data-lang", next);
-  document.documentElement.lang = next;
-  document.querySelector(".lang-btn").textContent = next === "en" ? "中文" : "English";
+  body.setAttribute('data-lang', body.getAttribute('data-lang') === 'zh' ? 'en' : 'zh');
+  document.documentElement.lang = body.getAttribute('data-lang');
 }
-
-// Scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
-}, { threshold: 0.1 });
-document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
-
+// Auto-detect language on load
+if (!navigator.language.startsWith('zh')) {
+  document.body.setAttribute('data-lang', 'en');
+  document.documentElement.lang = 'en';
+}
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener("click", e => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute("href"));
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href.length > 1) {
+      e.preventDefault();
+      const t = document.querySelector(href);
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
-
-// Auto-detect language
-if (navigator.language.startsWith("zh")) toggleLang();
 </script>
-
 </body>
 </html>
